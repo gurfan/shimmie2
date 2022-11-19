@@ -109,9 +109,9 @@ function ask_questions()
 		";
     }
 
-    $db_m = in_array(DatabaseDriverID::MYSQL->value, $drivers) ? '<option value="'. DatabaseDriverID::MYSQL .'">MySQL</option>' : "";
-    $db_p = in_array(DatabaseDriverID::PGSQL->value, $drivers) ? '<option value="'. DatabaseDriverID::PGSQL .'">PostgreSQL</option>' : "";
-    $db_s = in_array(DatabaseDriverID::SQLITE->value, $drivers) ? '<option value="'. DatabaseDriverID::SQLITE .'">SQLite</option>' : "";
+    $db_m = in_array(DatabaseDriverID::MYSQL->value, $drivers) ? '<option value="'. DatabaseDriverID::MYSQL->value .'">MySQL</option>' : "";
+    $db_p = in_array(DatabaseDriverID::PGSQL->value, $drivers) ? '<option value="'. DatabaseDriverID::PGSQL->value .'">PostgreSQL</option>' : "";
+    $db_s = in_array(DatabaseDriverID::SQLITE->value, $drivers) ? '<option value="'. DatabaseDriverID::SQLITE->value .'">SQLite</option>' : "";
 
     $warn_msg = $warnings ? "<h3>Warnings</h3>".implode("\n<p>", $warnings) : "";
     $err_msg = $errors ? "<h3>Errors</h3>".implode("\n<p>", $errors) : "";
