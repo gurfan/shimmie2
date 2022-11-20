@@ -30,15 +30,15 @@ class Page extends BasePage
 
         $menu = "<div class='menu'>
 			<script type='text/javascript' src='{$data_href}/themes/{$theme_name}/wz_tooltip.js'></script>
-			<a href='".make_link()."' onmouseover='Tip(&#39;Home&#39;, BGCOLOR, &#39;#C3D2E0&#39;, FADEIN, 100)' onmouseout='UnTip()'><img alt='' src='{$data_href}/favicon.ico' style='position: relative; top: 3px;'></a>
-			<b>{$site_name}</b> ";
+			<a href='/' onmouseover='Tip(&#39;Home&#39;, BGCOLOR, &#39;#C3D2E0&#39;, FADEIN, 100)' onmouseout='UnTip()'><img alt='' src='{$data_href}/favicon.ico' style='position: relative; top: 3px;'>
+			<b>{$site_name}</b></a> ";
 
         // Custom links: These appear on the menu.
         $custom_links = "";
         foreach ($nav_links as $nav_link) {
             $custom_links .= $this->navlinks($nav_link->link, $nav_link->description, $nav_link->active);
         }
-        $menu .= "{$custom_links}</div>";
+        $menu .= "<div class='navlinksmenu'>{$custom_links}</div></div>";
 
         $left_block_html = "";
         $main_block_html = "";
