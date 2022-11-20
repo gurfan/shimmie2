@@ -30,7 +30,7 @@ class Page extends BasePage
 
         $menu = "<div class='menu'>
 			<script type='text/javascript' src='{$data_href}/themes/{$theme_name}/wz_tooltip.js'></script>
-			<a href='/' class='menu-logo'><img alt='' src='{$data_href}/themes/{$theme_name}/static/clown_64.png' style='position: relative; top: 3px;'>
+			<a href='/' class='menu-logo'><img alt='' src='{$data_href}/themes/{$theme_name}/static/clown_64.png'>
 			<b>{$site_name}</b></a> ";
 
         // Custom links: These appear on the menu.
