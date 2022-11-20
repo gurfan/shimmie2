@@ -406,12 +406,12 @@ a.tab[href='/popular_by_year'] {
   display: inline;
 }
 
-/*
+
 .menu-logo img {
-  top: 3px;
+  bottom: 0px;
   position: relative;
 }
-*/
+
 
 .menu-logo b {
   margin-left: 5px;
