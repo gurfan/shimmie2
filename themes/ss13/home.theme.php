@@ -44,7 +44,7 @@ EOD
 		";
         return "
 		<div id='front-page'>
-			<h1><a style='text-decoration: none;' href='".make_link()."'><span>$sitename</span></a></h1>
+			<h1><a style='text-decoration: none;' href='".make_link()."'><span><img src="/themes/ss13/static/ss13.png"></span></a></h1>
 			$main_links_html
 			$search_html
 			$message_html
