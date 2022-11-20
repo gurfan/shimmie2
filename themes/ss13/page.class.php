@@ -24,7 +24,7 @@ class Page extends BasePage
         global $config;
 
         list($nav_links, $sub_links) = $this->get_nav_links();
-        $theme_name = $config->get_string(SetupConfig::THEME, 'lite');
+        $theme_name = $config->get_string(SetupConfig::THEME, 'ss13');
         $site_name = $config->get_string(SetupConfig::TITLE);
         $data_href = get_base_href();
 
