@@ -355,3 +355,223 @@ NAV .thumb {
    z-index:3;
    display:none;
 }
+
+/* TAG HISTORY */
+.taghist-first,
+.taghist-first a{
+  color: grey;
+}
+
+.taghist-added,
+a.taghist-added {
+  color: green;
+}
+
+.taghist-removed,
+a.taghist-removed {
+  color: red;
+}
+
+.taghist-created,
+a.taghist-created {
+  color: blue;
+}
+
+
+.taghist-vandal {
+  background-color: #f0d3ce;
+}
+
+/* MISC */
+
+#front-page > .litecustom-logo  {
+  margin: 20px;
+}
+
+a.tab[href='/popular_by_day'],
+a.tab[href='/popular_by_month'],
+a.tab[href='/popular_by_year'] {
+  display: none;
+}
+
+/* Hide mini upload form */
+#Uploadleft {display: none;}
+
+.menu-logo {
+  display: inline;
+}
+
+.menu-logo img {
+  top: 3px;
+  position: relative;
+}
+
+.menu-logo b {
+  margin-left: 5px;
+}
+
+.menu-logo,
+.menu-logo:visited,
+.menu-logo:active,
+.menu-logo:hover {
+  color: black !important;
+  text-decoration: none !important;
+}
+
+#Write_a_PMmain table.form {
+  width: 400px;
+}
+
+.sfoot span.tab {
+  display: none;
+}
+
+@media screen and (max-width: 640px) {
+
+    /* Hide site-specific sidebar items */
+    #Featured_Postleft,
+    #Uploadleft,
+    #Popular_Tagsleft,
+    #Tagsleft,
+    #Related_Tagsleft,
+    #Link_to_Postmain,
+    #Post_Controlsleft,
+    #Post_Scoreleft,
+    #Bulk_Actionsleft {
+      display: none;
+    }
+
+    /* Clean-up sidebar and nav margins */
+    nav {
+      float: none;
+      margin: 0 10px 10px 10px;
+      width: auto;
+
+    }
+
+    article {
+      margin: 0px 10px;
+      text-align: center;
+    }
+
+    .navtop, .maintop {
+      width: auto;
+    }
+
+    .tab {
+      margin: 0;
+      margin-bottom: 10px;
+    }
+
+    .navtop {
+      top: 15px;
+    }
+
+    .navside {
+      text-align: center;
+    }
+
+    .sfoot,
+    .sbar {
+      text-align: center;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .sbar .tab {
+      margin-bottom: 0;
+    }
+
+    /* Nicer image gallery */
+    .thumb {
+      width: 47%;
+    }
+
+    .thumb img,
+    #main_image
+    {
+      width: auto !important;
+      height: auto !important;
+      max-width: 100% !important;
+    }
+
+    /* Comments displaying off screen fix */
+    .comment .info {
+      top: 100%;
+      left: 0;
+      width: auto;
+    }
+
+    /* Header navigation links */
+    .navlinksmenu {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+    }
+
+    .navlinksmenu .tab {
+      margin-bottom: 0px;
+    }
+
+    /* Header logo */
+    .menu-logo {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .menu-logo img {
+      top: -2px;
+    }
+
+    .menu-logo b {
+      font-size: 18px;
+    }
+
+    /* Fix table widths */
+    article table,
+    #Signupmain table.form,
+    #Operationsmain table.form,
+    table.zebra,
+    #Write_a_PMmain table.form {
+      width: 100%;
+    }
+
+    /* Fix table widths where styles set in HTML */
+    #Write_a_PMmain table,
+    #IPsmain table {
+      width: 100% !important;
+    }
+
+    /* PM list */
+    table.zebra {
+      word-wrap: break-word;
+      table-layout: fixed;
+    }
+
+    /* Prevent overflow */
+    pre {
+       word-wrap: break-word;
+       white-space: pre-wrap;
+    }
+
+    /* Comment list page */
+    .comment_list_table .thumb {
+      margin-bottom: 10px;
+      width: auto;
+    }
+
+    .comment_list_table td {
+      width: 50% !important;
+      text-align: center;
+    }
+
+    /* Image page */
+    .image_info td {
+      width: auto;
+    }
+}
