@@ -7,13 +7,15 @@ class CustomViewImageTheme extends ViewImageTheme
     public function display_page(Image $image, $editor_parts)
     {
         global $page;
+        $page->set_title("Post {$image->id}: ".$image->get_tag_list());
         $page->set_heading(html_escape($image->get_tag_list()));
-        $page->add_block(new Block("Search", $this->build_navigation($image), "left", 0));
-        $page->add_block(new Block("Information", $this->build_information($image), "left", 15));
-        $page->add_block(new Block(null, $this->build_info($image, $editor_parts), "main", 15));
+        $page->add_block(new Block("Navigation", $this->build_navigation($image), "left", 0));
+        $page->add_block(new Block("Statistics", $this->build_stats($image), "left", 15));
+        $page->add_block(new Block(null, $this->build_info($image, $editor_parts), "main", 11));
+        $page->add_block(new Block(null, $this->build_pin($image), "main", 11));
     }
 
-    private function build_information(Image $image): string
+    private function build_stats(Image $image): string
     {
         $h_owner = html_escape($image->get_owner()->name);
         $h_ownerlink = "<a href='".make_link("user/$h_owner")."'>$h_owner</a>";
@@ -28,13 +30,15 @@ class CustomViewImageTheme extends ViewImageTheme
         }
 
         $html = "
-		ID: {$image->id}
-		<br>Uploader: $h_ownerlink
-		<br>Date: $h_date
-		<br>Size: $h_filesize ({$image->width}x{$image->height})
-		<br>Type: $h_type
+		Id: {$image->id}
+		<br>Posted: $h_date by $h_ownerlink
+		<br>Size: {$image->width}x{$image->height}
+		<br>Filesize: $h_filesize
+		<br>Type: ".$h_type."
 		";
-
+        if ($image->video_codec!=null) {
+            $html .= "<br/>Video Codec: $image->video_codec";
+        }
         if ($image->length!=null) {
             $h_length = format_milliseconds($image->length);
             $html .= "<br/>Length: $h_length";
@@ -53,27 +57,10 @@ class CustomViewImageTheme extends ViewImageTheme
             if ($image->rating == null || $image->rating == "?") {
                 $image->rating = "?";
             }
-            if (Extension::is_enabled(RatingsInfo::KEY)) {
-                $h_rating = Ratings::rating_to_human($image->rating);
-                $html .= "<br>Rating: $h_rating";
-            }
+            $h_rating = Ratings::rating_to_human($image->rating);
+            $html .= "<br>Rating: $h_rating";
         }
 
         return $html;
-    }
-
-    protected function build_navigation(Image $image): string
-    {
-        //$h_pin = $this->build_pin($image);
-        $h_search = "
-			<form action='".make_link()."' method='GET'>
-				<input name='search' type='text'  style='width:75%'>
-				<input type='submit' value='Go' style='width:20%'>
-				<input type='hidden' name='q' value='/post/list'>
-				<input type='submit' value='Find' style='display: none;'>
-			</form>
-		";
-
-        return "$h_search";
     }
 }

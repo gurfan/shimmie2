@@ -2,51 +2,18 @@
 
 declare(strict_types=1);
 /**
- * Name: Danbooru 2 Theme
- * Author: Bzchan <bzchan@animemahou.com>, updated by Daniel Oaks <daniel@danieloaks.net>
- * Link: https://code.shishnet.org/shimmie2/
+ * Name: Lite Theme
+ * Author: Zach Hall <zach@sosguy.net>
+ * Link: http://seemslegit.com
  * License: GPLv2
- * Description: This is a simple theme changing the css to make shimme
- *              look more like danbooru as well as adding a custom links
- *              bar and title to the top of every page.
+ * Description: A mashup of Default, Danbooru, the interface on qwebirc, and
+ * 	       some other sites, packaged in a light blue color.
  */
-//Small changes added by zshall <http://seemslegit.com>
-//Changed CSS and layout to make shimmie look even more like danbooru
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-Danbooru 2 Theme - Notes (Bzchan)
-
-Files: default.php, style.css
-
-How to use a theme
-- Copy the danbooru2 folder with all its contained files into the "themes"
-  directory in your shimmie installation.
-- Log into your shimmie and change the Theme in the Board Config to your
-  desired theme.
-
-Changes in this theme include
-- Adding and editing various elements in the style.css file.
-- $site_name and $front_name retreival from config added.
-- $custom_link and $title_link preparation just before html is outputed.
-- Altered outputed html to include the custom links and removed heading
-  from being displayed (subheading is still displayed)
-- Note that only the sidebar has been left aligned. Could not properly
-  left align the main block because blocks without headers currently do
-  not have ids on there div elements. (this was a problem because
-  paginator block must be centered and everything else left aligned)
-
-Tips
-- You can change custom links to point to whatever pages you want as well as adding
-  more custom links.
-- The main title link points to the Front Page set in your Board Config options.
-- The text of the main title is the Title set in your Board Config options.
-- Themes make no changes to your database or main code files so you can switch
-  back and forward to other themes all you like.
-
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 class Page extends BasePage
 {
     public bool $left_enabled = true;
+
     public function disable_left()
     {
         $this->left_enabled = false;
@@ -57,28 +24,40 @@ class Page extends BasePage
         global $config;
 
         list($nav_links, $sub_links) = $this->get_nav_links();
+        $theme_name = $config->get_string(SetupConfig::THEME, 'lite');
+        $site_name = $config->get_string(SetupConfig::TITLE);
+        $data_href = get_base_href();
+
+        $menu = "<div class='menu'>
+			<script type='text/javascript' src='{$data_href}/themes/{$theme_name}/wz_tooltip.js'></script>
+			<a href='".make_link()."' onmouseover='Tip(&#39;Home&#39;, BGCOLOR, &#39;#C3D2E0&#39;, FADEIN, 100)' onmouseout='UnTip()'><img alt='' src='{$data_href}/favicon.ico' style='position: relative; top: 3px;'></a>
+			<b>{$site_name}</b> ";
+
+        // Custom links: These appear on the menu.
+        $custom_links = "";
+        foreach ($nav_links as $nav_link) {
+            $custom_links .= $this->navlinks($nav_link->link, $nav_link->description, $nav_link->active);
+        }
+        $menu .= "{$custom_links}</div>";
 
         $left_block_html = "";
-        $user_block_html = "";
         $main_block_html = "";
-        $sub_block_html = "";
+        $sub_block_html  = "";
+        $user_block_html = "";
 
         foreach ($this->blocks as $block) {
             switch ($block->section) {
                 case "left":
-                    $left_block_html .= $block->get_html(true);
+                    $left_block_html .= $this->block_to_html($block, true);
+                    break;
+                case "main":
+                    $main_block_html .= $this->block_to_html($block, false);
                     break;
                 case "user":
                     $user_block_html .= $block->body;
                     break;
                 case "subheading":
-                    $sub_block_html .= $block->body;
-                    break;
-                case "main":
-                    if ($block->header == "Posts") {
-                        $block->header = "&nbsp;";
-                    }
-                    $main_block_html .= $block->get_html(false);
+                    $sub_block_html .= $this->block_to_html($block, false);
                     break;
                 default:
                     print "<p>error: {$block->header} using an unknown section ({$block->section})";
@@ -86,42 +65,21 @@ class Page extends BasePage
             }
         }
 
-        if (empty($this->subheading)) {
-            $subheading = "";
-        } else {
-            $subheading = "<div id='subtitle'>{$this->subheading}</div>";
-        }
-
-        $site_name = $config->get_string(SetupConfig::TITLE); // bzchan: change from normal default to get title for top of page
-        $main_page = $config->get_string(SetupConfig::MAIN_PAGE); // bzchan: change from normal default to get main page for top of page
-
-        $custom_links = "";
-        foreach ($nav_links as $nav_link) {
-            $custom_links .=  "<li>".$this->navlinks($nav_link->link, $nav_link->description, $nav_link->active)."</li>";
-        }
-
         $custom_sublinks = "";
         if (!empty($sub_links)) {
             $custom_sublinks = "<div class='sbar'>";
             foreach ($sub_links as $nav_link) {
-                $custom_sublinks .= "<li>".$this->navlinks($nav_link->link, $nav_link->description, $nav_link->active)."</li>";
+                $custom_sublinks .= $this->navlinks($nav_link->link, $nav_link->description, $nav_link->active);
             }
             $custom_sublinks .= "</div>";
         }
 
-        // bzchan: failed attempt to add heading after title_link (failure was it looked bad)
-        //if($this->heading==$site_name)$this->heading = '';
-        //$title_link = "<h1><a href='".make_link($main_page)."'>$site_name</a>/$this->heading</h1>";
-
-        // bzchan: prepare main title link
-        $title_link = "<h1 id='site-title'><a href='".make_link($main_page)."'>$site_name</a></h1>";
-
-        if ($this->left_enabled) {
-            $left = "<nav>$left_block_html</nav>";
-            $withleft = "withleft";
+        if ($this->left_enabled == false) {
+            $left_block_html = "";
+            $main_block_html = "<article id='body_noleft'>{$main_block_html}</article>";
         } else {
-            $left = "";
-            $withleft = "noleft";
+            $left_block_html = "<nav>{$left_block_html}</nav>";
+            $main_block_html = "<article>{$main_block_html}</article>";
         }
 
         $flash_html = $this->flash ? "<b id='flash'>".nl2br(html_escape(implode("\n", $this->flash)))."</b>" : "";
@@ -131,35 +89,55 @@ class Page extends BasePage
         print <<<EOD
 <!doctype html>
 <html class="no-js" lang="en">
-	$head_html
+    $head_html
 	<body>
 		<header>
-			$title_link
-			<ul id="navbar" class="flat-list">
-				$custom_links
-			</ul>
-			<ul id="subnavbar" class="flat-list">
-				$custom_sublinks
-			</ul>
+			$menu
+			$custom_sublinks
+			$sub_block_html
 		</header>
-		$subheading
-		$sub_block_html
-		$left
-		<article class="$withleft">
-			$flash_html
-			$main_block_html
-		</article>
-		<footer><div>$footer_html</div></footer>
+		$left_block_html
+		$flash_html
+		$main_block_html
+		<footer>
+		    $footer_html
+		</footer>
 	</body>
 </html>
 EOD;
+    } /* end of function display_page() */
+
+    public function block_to_html(Block $block, bool $hidable=false): string
+    {
+        $h = $block->header;
+        $b = $block->body;
+        $i = $block->id;
+        $html = "<section id='{$i}'>";
+        if (!is_null($h)) {
+            if ($salt == "main") {
+                $html .= "<div class='maintop navside tab shm-toggler' data-toggle-sel='#{$i}'>{$h}</div>";
+            } else {
+                $html .= "<div class='navtop navside tab shm-toggler' data-toggle-sel='#{$i}'>{$h}</div>";
+            }
+        }
+        if (!is_null($b)) {
+            if ($salt =="main") {
+                $html .= "<div class='blockbody'>{$b}</div>";
+            } else {
+                $html .= "
+					<div class='navside tab'>{$b}</div>
+				";
+            }
+        }
+        $html .= "</section>";
+        return $html;
     }
 
     public function navlinks(Link $link, string $desc, bool $active): ?string
     {
         $html = null;
         if ($active) {
-            $html = "<a class='current-page' href='{$link->make_link()}'>{$desc}</a>";
+            $html = "<a class='tab-selected' href='{$link->make_link()}'>{$desc}</a>";
         } else {
             $html = "<a class='tab' href='{$link->make_link()}'>{$desc}</a>";
         }

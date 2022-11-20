@@ -1,165 +1,221 @@
-.noleft{
-padding-left:2rem;
+/**
+ * Some style elements borrowed from the QWebIRC project
+ * http://qwebirc.org/
+ */
+
+BODY {
+	background: #F0F7FF;
+	font-family: sans-serif;
+	font-size: 14px;
+	margin: 0;
 }
-HEADER {
-margin-bottom:0.9rem;
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+3                            menu bar                            *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+.menu {
+	border-bottom: 1px solid #C3D2E0;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding: 4px;
+	background: #E3EFFA;
 }
-HEADER #site-title {
-padding:0.6rem 2rem 0.25rem;
+a.tab, a.tab:visited {
+	color:#000000;
+	text-decoration:none;
 }
-HEADER ul#navbar, HEADER ul#subnavbar {
-font-family:Verdana,Helvetica,sans-serif;
-font-size:110%;
+a.tab:hover, a.tab:active, .tab-selected {
+	color:#000000;
+	background-color:#FFFFFE;
+	text-decoration:none;
 }
-HEADER ul#navbar {
-margin:0;
-padding:0 1rem 0 2rem;
+.tab, .tab-selected, .tframe, #tips {
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border:1px solid #C8D1DB;
+	cursor:default;
+	margin-right:2px;
+	padding:2px;
 }
-HEADER ul#navbar li {
-margin:0;
+.tframe {
+	margin:4px;
 }
-HEADER ul#navbar li a {
-display:inline-block;
-margin:0 0.15rem;
-padding:0.4rem 0.6rem;
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+3                        secondary bars                          *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+.sbar {
+	border-bottom: 1px solid #C3D2E0;
+	margin-top: 0;
+	margin-bottom: 16px;
+	padding: 4px;
+	background: #CEDFF0;
+	text-align: left;
 }
-HEADER ul#navbar li:first-child a {
-margin-left: -0.6rem;
-color: #FF3333;
-font-weight: bold;
+.sfoot {
+	border-top: 1px solid #C3D2E0;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding: 4px;
+	background: #CEDFF0;
+	text-align: right;
 }
-HEADER ul#navbar li a.current-page {
-background-color:#EEEEFF;
-border-radius:0.2rem 0.2rem 0 0;
-font-weight:bold;
+.navside {
+	background:none repeat scroll 0 0 #CEDFF0;
+	text-align:left;
+	padding:4px;
+	font-size:85%;
+	border:1px solid #C3D2E0;
+	margin-bottom:5px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
 }
-HEADER ul#subnavbar {
-margin:0 0 0.5rem;
-padding:0 1rem 0 2rem;
-background-color:#EEEEFF;
+.lazy{
+	background:none repeat scroll 0 0 #CEDFF0;
+	padding:4px;
+	border:1px solid #C3D2E0;
+	margin:5px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
 }
-HEADER ul#subnavbar li {
-display:inline-block;
-margin:0 0.15rem;
-padding:0.4rem 0.6rem;
+.navtop, .maintop {
+	font-size:110%;
+	border-bottom:0 none;
+	margin:0 0 2px 0; /* top right bottom left */
+	padding:2px 10px;
+	position:relative;
+	left:0;
+	width:50%;
 }
-HEADER ul#subnavbar li:first-child {
-margin-left: -0.6rem;
+.navtop {
+	top:7px;
 }
-body {
-background-color:#FFFFFF;
-font-weight:normal;
-font-style:normal;
-font-variant:normal;
-font-size-adjust:none;
-font-stretch:normal;
-font-size:80%;
-line-height:normal;
--x-system-font:none;
+.maintop {
+	top:0;
+	margin-top:5px;
+	margin-bottom:5px;
 }
-h1 {
-margin-top:0;
-margin-bottom:0;
-padding:0.3rem;
-font-size:2.2rem;
+#tips, #blotter1, #blotter2 {
+	margin-right:16px;
+	margin-left:16px;
 }
-h1 a {
-color:black;
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+3                  things common to all pages                    *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+H1 A {
+	color: black;
 }
-h3 {
-margin-top:0;
-margin-bottom:0;
-padding:0.2rem 0.2rem 0.2rem 0;
-font-size:1rem;
+A, A:hover, A:active, A:visited {
+	color: #2860AD;
 }
-h4 {
-font-size:1.4rem;
+H3 {
+	text-align: center;
+	margin: 0;
 }
-h5 {
-font-size:1.2rem;
+THEAD {
+	font-weight: bold;
 }
-table.zebra {border-spacing: 0;border-collapse: collapse;}
-table.zebra > tbody > tr:hover {background: #FFD;}
-table.zebra th { padding-right: 0.4rem;color: #171BB3;}
-table.zebra td {margin: 0;padding-right: 0.6rem;border: 1px dotted #EEE;}
-table.zebra th {margin: 0;text-align: left;}
-thead {
-font-weight:bold;
--moz-background-clip:border;
--moz-background-inline-policy:continuous;
--moz-background-origin:padding;
+TD {
+	vertical-align: top;
+	text-align: left;
 }
-td {
-vertical-align:top;
+CODE {
+	background: #DEDEDE;
+	font-size: 0.8em;
 }
 #subtitle {
-margin:auto;
-width:256px;
-border-top:medium none;
-text-align:center;
-font-size:0.75em;
+	width: 256px;
+	font-size: 0.75em;
+	margin: -16px auto auto;
+	text-align: center;
+	border: 1px solid black;
+	border-top: none;
+	background: #DDD;
 }
-#short-wiki-description {
-padding:0 2em;
-font-size:1.2em;
+
+TABLE.zebra {border-spacing: 0; border: 2px solid #C3D2E0;}
+TABLE.zebra TD, TABLE.zebra TH {vertical-align: middle; padding: 4px;}
+TABLE.zebra THEAD TD, TABLE.zebra THEAD TH {border-bottom: 2px solid #C3D2E0;}
+TABLE.zebra TFOOT TD, TABLE.zebra TFOOT TH {border-top: 2px solid #C3D2E0;}
+TABLE.zebra TR TD {border-bottom: 1px solid #C3D2E0;}
+TABLE.zebra TR:nth-child(odd) {background: #CEDFF0;}
+TABLE.zebra TR:nth-child(even) {background: #F0F7FF;}
+
+INPUT, TEXTAREA, button {
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border:1px solid #C8D1DB;
+	cursor:default;
+	margin-right:2px;
+	padding:2px;
 }
-#short-wiki-description h2 {
-padding-bottom:0.2em;
+
+INPUT:hover, button:hover, TEXTAREA:hover {
+	background-color:#FFFFFF;
+	text-decoration:none;
 }
+
 FOOTER {
-clear:both;
-border-top:solid 1px #E7E7F7;
-margin-top:1rem;
-text-align:center;
-color:#555555;
-font-size:0.8rem;
+	clear: both;
+	padding: 8px;
+	font-size: 0.7em;
+	text-align: right;
+	border-top: 1px solid #C3D2E0;
+	background: #E3EFFA;
 }
-FOOTER > DIV {
-margin: 1rem 2rem;
+
+A {text-decoration: none;}
+A:hover {text-decoration: underline;}
+
+BLOCKQUOTE {
+	border: 1px solid #C3D2E0;
+	padding: 8px;
+	background: #E3EFFA;
 }
-form {
-margin:0;
+
+UL {
+	text-align: left;
 }
-a {
-text-decoration:none;
-}
-a:hover {
-text-decoration:underline;
-}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+*             the navigation bar, and all its blocks             *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 NAV {
-float:left;
-padding:0 1rem 0.2rem 2rem;
-width:11.5rem;
-text-align:left;
+	width: 200px;
+	float: left;
+	text-align: center;
+	margin-left: 16px;
 }
-NAV section + section {
-margin-top:1rem;
+NAV .blockbody {
+	font-size: 0.85em;
+	text-align: center;
 }
-NAV table {
-width:15rem;
+NAV TABLE {
+	width: 190px;
 }
-NAV td {
-vertical-align:middle;
+NAV TD {
+	vertical-align: middle;
 }
-NAV input {
-padding:0;
-width:100%;
+NAV INPUT, nav button {
+	width: 95%;
+	padding: 0;
 }
-NAV select {
-padding:0;
-width:100%;
+NAV SELECT {
+	width: 100%;
+	padding: 0;
 }
-NAV h3 {
-text-align:left;
+
+#comments P {
+	text-align: left;
+	width: 150px;
+	max-width: 150px;
+	overflow: hidden;
 }
-#comments p {
-overflow:hidden;
-max-width:150px;
-width:15rem;
-text-align:left;
+.comment {
+	text-align: left;
 }
+
 TABLE.tag_list {
-	width: auto;
 	border-collapse: collapse;
 }
 TABLE.tag_list>THEAD {
@@ -173,197 +229,129 @@ TABLE.tag_list>TBODY>TR>TD {
 TABLE.tag_list>TBODY>TR>TD:after {
 	content: " ";
 }
-.tag_count {
-display:inline-block;
-margin-left:0.4rem;
-color:#AAAAAA;
+
+.more:after {
+	content: " >>>";
 }
-.more {
-content:"More â";
+
+.tag_count:before {
+	content: "(";
 }
-.comment {
-margin-bottom:8px;
+.tag_count:after {
+	content: ")";
 }
-.comment .meta {
-width: 15rem;
-color: gray;
-}
-.comment TD {
-text-align: left;
-}
-.withleft {
-margin-left:14.5rem;
-}
-div#paginator {
-display:block;
-clear:both;
-padding:2em 0 1em;
-text-align:center;
-font-weight:bold;
-font-size:1em;
-}
+
 .paginator {
-margin:16px;
-text-align:center;
+	clear: both;
+	padding: 4px;
+	border-right: 1px solid #C3D2E0;
+	border-left: 1px solid #C3D2E0;
 }
-div#paginator b {
-margin:3px;
-padding:4px 8px;
+.paginator A {
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	color: #000;
+	border:1px solid #C8D1DB;
+	cursor:default;
+	margin-right:2px;
+	padding:2px;
 }
-div#paginator a {
-margin:3px;
-padding:4px 8px;
-border:1px solid #EEEEEE;
+.paginator A:hover {
+	background-color:#FFFFFF;
+	text-decoration:none;
 }
-div#paginator a:hover {
-border:1px solid #EEEEEE;
-background:blue none repeat scroll 0 0;
-color:white;
--moz-background-clip:border;
--moz-background-inline-policy:continuous;
--moz-background-origin:padding;
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+*                 the main part of each page                     *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+ARTICLE {
+	margin-left: 226px;
+	margin-right: 16px;
+	text-align: left;
+	height: 1%;
 }
-span.thumb {
-display:inline-block;
-float:left;
-width:220px;
-height:220px;
-text-align:center;
+ARTICLE.body_noleft {
+	margin-left: 4px;
+	margin-right: 16px;
+	margin-bottom:16px;
+	padding-left:4px;
+	padding-right:4px;
+	text-align: left;
+	height: 1%;
 }
+ARTICLE TABLE {
+	width: 90%;
+}
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+*                     specific page types                        *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 #pagelist {
-margin-top:32px;
+	margin-top: 32px;
 }
-#large_upload_form {
-width:600px;
+
+/*.rr {text-align: left; background: #E3EFFA; margin: 8px;}
+.rrtop     {background: url("circle-tl.png") no-repeat top left;}
+.rrtop div {background: url("circle-tr.png") no-repeat top right;}
+.rrbot     {background: url("circle-bl.png") no-repeat bottom left;}
+.rrbot div {background: url("circle-br.png") no-repeat bottom right;}
+.rrtop, .rrtop div, .rrbot, .rrbot div {height: 8px; width: 100%;}
+.rrcontent {margin: 0px 8px; text-align: left;}
+
+.hrr {text-align: left; background: #C3D2E0; margin: 8px;}
+.hrrtop     {background: url("circle-tl.png") no-repeat top left;}
+.hrrtop div {background: url("circle-tr.png") no-repeat top right;}
+.hrrbot     {background: url("circle-bl.png") no-repeat bottom left;}
+.hrrbot div {background: url("circle-br.png") no-repeat bottom right;}
+.hrrtop, .hrrtop div, .hrrbot, .hrrbot div {height: 8px; width: 100%;}
+.hrrcontent {margin: 0px 8px;}*/
+
+.setupblock {
+	text-align: center;
+	width: 350px;
 }
-.setupblock, .tagcategoryblock {
-margin:0.6rem 1rem 0.6rem 0;
-padding:0.5rem 0.6rem 0.7rem;
-width:18rem;
-border:1px solid #AAAAAA;
-border-radius:0.25rem;
-display:inline-block;
+.setupblock TEXTAREA {
+	width: 300px;
+	font-size: 0.75em;
 }
-.tagcategoryblock table {
-width:100%;
-border-spacing:0;
-}
-.tagcategoryblock input, .tagcategoryblock span {
-width:100%;
-height:100%;
-}
-.tagcategoryblock td:first-child {
-padding:0.3rem 0.7rem 0.4rem 0;
-text-align:right;
-width:40%;
-}
-.tagcategoryblock td:last-child {
-width:60%;
-}
-.tagcategoryblock td:last-child span {
-padding:0.24rem 0.7rem 0.5rem 0;
-display:block;
-}
-.tagcategoryblock button {
-width:100%;
-margin-top:0.4rem;
-padding:0.2rem 0.6rem;
-}
+
 .helpable {
-border-bottom:1px dashed gray;
+	border-bottom: 1px dashed gray;
 }
+
 .ok {
-background:#AAFFAA none repeat scroll 0 0;
--moz-background-clip:border;
--moz-background-inline-policy:continuous;
--moz-background-origin:padding;
+	background: #AFA;
 }
 .bad {
-background:#FFAAAA none repeat scroll 0 0;
--moz-background-clip:border;
--moz-background-inline-policy:continuous;
--moz-background-origin:padding;
+	background: #FAA;
 }
-.comment .username {
-font-weight:bold;
-font-size:1.5em;
+
+NAV .thumbblock {
+	float: none;
+	height: auto;
 }
-HEADER {
-text-align:left;
+NAV .thumb {
+	margin-bottom: 0;
 }
-HEADER h1 {
-text-align:left;
+.thumbblock {
+	width: 220px;
+	height: 220px;
+	display: inline-block;
+	float: left;
 }
-* {
-margin:0;
-padding:0;
-font-family:Tahoma,Verdana,Helvetica,sans-serif;
+.thumb {
+	display: inline-block;
+	text-align: center;
+	margin-bottom: 32px;
 }
-a:link {
-color:#006FFA;
-text-decoration:none;
-}
-a:visited {
-color:#006FFA;
-text-decoration:none;
-}
-a:hover {
-color:#33CFFF;
-text-decoration:none;
-}
-a:active {
-color:#006FFA;
-text-decoration:none;
-}
-ul.flat-list {
-display:block;
-margin:0;
-padding:0;
-}
-ul.flat-list * {
-display:inline;
-text-align:left;
-}
-ul.flat-list li {
-margin:0 1.3em 0 0;
-list-style-type:none;
-text-align:left;
-font-weight:bold;
-}
-ul.flat-list li a {
-font-weight:normal;
-}
-#tips {
-margin-left:16px;
-}
-#blotter1 {
-position: relative;
-margin-right:16px;
-margin-left:16px;
-font-size: 90%;
-}
-#blotter2 {
-margin-right:16px;
-margin-left:16px;
-font-size: 90%;
-}
-#flash {
-background:#FDF5D9;
-border:1px solid #FCEEC1;
-margin:1rem 0;
-padding:1rem;
-text-align:center;
-border-radius:0.5rem;
-}
-ARTICLE {
-margin-right:1rem;
-}
-ARTICLE section + section {
-margin-top:1rem;
-}
-form + form {
-margin-top:0.5rem;
-}
-#Imagemain h3 {
-display:none;
+
+.tooltip{
+   position:absolute;
+   top:0;
+   left:0;
+   z-index:3;
+   display:none;
 }
