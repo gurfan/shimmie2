@@ -19,6 +19,11 @@ BODY {
 	padding: 4px;
 	background: #E3EFFA;
 }
+
+.navlinksmenu {
+    display: inline;
+}
+
 a.tab, a.tab:visited {
 	color:#000000;
 	text-decoration:none;
@@ -401,10 +406,12 @@ a.tab[href='/popular_by_year'] {
   display: inline;
 }
 
+/*
 .menu-logo img {
   top: 3px;
   position: relative;
 }
+*/
 
 .menu-logo b {
   margin-left: 5px;
