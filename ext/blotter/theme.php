@@ -170,7 +170,7 @@ class BlotterTheme extends Themelet
             $in_text = "Empty.";
         } else {
             $clean_date = date("m/d/y", strtotime($entries[0]['entry_date']));
-            $out_text = "Blotter updated: {$clean_date}";
+            $out_text = "Updated: {$clean_date}";
             $in_text = "<ul>$entries_list</ul>";
         }
 
