@@ -171,7 +171,7 @@ class PrivMsg extends Extension
                     break;
                 case "send":
                     if ($user->can(Permissions::SEND_PM)) {
-                        if ($user->check_auth_token()) {
+                        if ($user->check_auth_token() || $user->is_anonymous()) {
                             $to_id = int_escape($_POST["to_id"]);
                             $from_id = $user->id;
                             $subject = $_POST["subject"];
