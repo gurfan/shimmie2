@@ -114,14 +114,14 @@ EOD;
         $i = $block->id;
         $html = "<section id='{$i}'>";
         if (!is_null($h)) {
-            if ($salt == "main") {
+            if ($block->section == "main") {
                 $html .= "<div class='maintop navside tab shm-toggler' data-toggle-sel='#{$i}'>{$h}</div>";
             } else {
                 $html .= "<div class='navtop navside tab shm-toggler' data-toggle-sel='#{$i}'>{$h}</div>";
             }
         }
         if (!is_null($b)) {
-            if ($salt =="main") {
+            if ($block->section == "main") {
                 $html .= "<div class='blockbody'>{$b}</div>";
             } else {
                 $html .= "
