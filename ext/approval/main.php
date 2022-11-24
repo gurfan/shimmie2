@@ -103,7 +103,7 @@ class Approval extends Extension
     {
         global $page;
         if($event->image->approved===false) {
-            $page->add_block(new Block("Awaiting Approval", "This post is awaiting approval."));
+            $page->add_block(new Block("Awaiting Approval", "This post is awaiting approval.", "main", 0));
         }
 
         if (!$this->check_permissions(($event->image))) {
