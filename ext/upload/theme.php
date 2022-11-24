@@ -49,7 +49,7 @@ class UploadTheme extends Themelet
                 ["id"=>"large_upload_form", "class"=>"vert"],
                 TR(
                     TD(["width"=>"20"], rawHTML("Common&nbsp;Tags")),
-                    TD(["colspan"=>"5"], INPUT(["name"=>"tags", "type"=>"text", "placeholder"=>"tagme", "class"=>"autocomplete_tags", "autocomplete"=>"off"]))
+                    TD(["colspan"=>"5"], INPUT(["name"=>"tags", "type"=>"text", "placeholder"=>"tagme artist:anonymous", "class"=>"autocomplete_tags", "autocomplete"=>"off"]))
                 ),
                 TR(
                     TD(["width"=>"20"], rawHTML("Common&nbsp;Source")),
