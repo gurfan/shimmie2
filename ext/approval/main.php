@@ -102,11 +102,13 @@ class Approval extends Extension
     public function onDisplayingImage(DisplayingImageEvent $event)
     {
         global $page;
+        if($image->approved===false) {
+            $page->add_block(new Block("Awaiting Approval", "This post is awaiting approval."));
+        }
 
         if (!$this->check_permissions(($event->image))) {
             $page->set_mode(PageMode::REDIRECT);
             $page->set_redirect(make_link("post/list"));
-            $page->add_block(new Block("Awaiting Approval", "This post is awaiting approval."));
         }
     }
 
