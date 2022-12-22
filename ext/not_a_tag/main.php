@@ -79,18 +79,10 @@ class NotATag extends Extension
 
         $pairs = $database->get_pairs("SELECT LOWER(tag), redirect FROM untags");
         foreach ($pairs as $tag => $url) {
-        /*
             // cast to string because PHP automatically turns ["69" => "No sex"]
             // into [69 => "No sex"]
             if (in_array(strtolower((string)$tag), $tags)) {
                 throw new TagSetException("Invalid tag used: $tag", $url);
-            }
-        */
-            foreach ($tags as $tag_used) {
-                if (strpos(strtolower((string)$tag), $tag_used) !== false) {
-                    throw new TagSetException("Invalid tag used: $tag", $url);
-                    break;
-                }
             }
         }
     }
@@ -105,7 +97,18 @@ class NotATag extends Extension
 
         $ok_tags = [];
         foreach ($tags as $tag) {
+            /*
             if (!in_array(strtolower($tag), $untags)) {
+                $ok_tags[] = $tag;
+            }
+            */
+            $found = false;
+            foreach ($untags as $untag) {
+                if (strpos(strtolower((string)$tag), $tag_used) !== false) {
+                    $found = true;
+                }
+            }
+            if($found === false) {
                 $ok_tags[] = $tag;
             }
         }
