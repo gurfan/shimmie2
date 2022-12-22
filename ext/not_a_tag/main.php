@@ -104,7 +104,7 @@ class NotATag extends Extension
             */
             $found = false;
             foreach ($untags as $untag) {
-                if (strpos(strtolower((string)$tag), $tag_used) !== false) {
+                if (strpos(strtolower((string)$tag), $untag) !== false) {
                     $found = true;
                 }
             }
