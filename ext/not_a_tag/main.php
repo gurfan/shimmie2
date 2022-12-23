@@ -61,7 +61,8 @@ class NotATag extends Extension
         if ($user->can(Permissions::BAN_IMAGE)) {
             $event->tags = $this->strip($event->tags);
         } else {
-            $this->scan($event->tags);
+            //$this->scan($event->tags);
+            $event->tags = $this->strip($event->tags);
         }
     }
 
