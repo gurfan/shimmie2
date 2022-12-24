@@ -109,7 +109,7 @@ class NotATag extends Extension
                     $found = true;
                     break;
                 }
-                if(preg_match("[^\x00-\x7F]+",(string)$tag ) != false) {
+                if(preg_match("/[^\x00-\x7F]+/",(string)$tag ) != false) {
                     $found = true;
                     break;
                 }
