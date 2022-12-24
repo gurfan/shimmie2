@@ -107,6 +107,11 @@ class NotATag extends Extension
             foreach ($untags as $untag) {
                 if (strpos(strtolower((string)$tag), $untag) !== false) {
                     $found = true;
+                    break;
+                }
+                if(preg_match("[^\x00-\x7F]+",(string)$tag ) != false) {
+                    $found = true;
+                    break;
                 }
             }
             if($found === false) {
