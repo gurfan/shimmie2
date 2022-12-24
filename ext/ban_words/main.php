@@ -52,7 +52,7 @@ xanax
 
     public function onTagSet(TagSetEvent $event)
     {
-        $this->test_text(Tag::implode($event->tags), throw new TagSetException("Tags contain banned terms"));
+        $this->test_text(Tag::implode($event->tags), new SCoreException("Tags contain banned terms"));
     }
 
     public function onSetupBuilding(SetupBuildingEvent $event)
