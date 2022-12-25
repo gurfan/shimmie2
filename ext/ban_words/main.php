@@ -55,6 +55,11 @@ xanax
         $this->test_text(Tag::implode($event->tags), new TagSetException("Tags contain banned terms"));
     }
 
+    public function onUserCreation(UserCreationEvent $event)
+    {
+        $this-test_text($event->username, new UserCreationException("User creation has been blocked."));
+    }
+
     public function onSetupBuilding(SetupBuildingEvent $event)
     {
         $sb = $event->panel->create_new_block("Banned Phrases");
