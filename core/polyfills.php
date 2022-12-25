@@ -58,11 +58,12 @@ function ip_in_range(string $IP, string $CIDR): bool
 {
     list($net, $mask) = explode("/", $CIDR);
 
-    $ip_net = str_contains($net, ":") ? ip2long_v6($net) : ip2long($net);
+    $ipv6 = str_contains($net, ":");
+    $ip_net = $ipv6 ? ip2long_v6($net) : ip2long($net);
 
-    $ip_mask = ~((1 << (32 - $mask)) - 1);
+    $ip_mask = $ipv6 ? ~((1 << (128 - $mask)) - 1) : ~((1 << (32 - $mask)) - 1);
 
-    $ip_ip = ip2long($IP);
+    $ip_ip = $ipv6 ? ip2long_v6 : ip2long($IP);
 
     $ip_ip_net = $ip_ip & $ip_mask;
 
