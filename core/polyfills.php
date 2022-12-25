@@ -26,6 +26,29 @@ function array_iunique(array $array): array
     return $ok;
 }
 
+// ipv6
+function ip2long_v6($ip) {
+    $ip_n = inet_pton($ip);
+    $bin = '';
+    for ($bit = strlen($ip_n) - 1; $bit >= 0; $bit--) {
+        $bin = sprintf('%08b', ord($ip_n[$bit])) . $bin;
+    }
+
+    if (function_exists('gmp_init')) {
+        return gmp_strval(gmp_init($bin, 2), 10);
+    } elseif (function_exists('bcadd')) {
+        $dec = '0';
+        for ($i = 0; $i < strlen($bin); $i++) {
+            $dec = bcmul($dec, '2', 0);
+            $dec = bcadd($dec, $bin[$i], 0);
+        }
+        return $dec;
+    } else {
+        trigger_error('GMP or BCMATH extension not installed!', E_USER_ERROR);
+    }
+}
+
+
 /**
  * Figure out if an IP is in a specified range
  *
@@ -35,7 +58,8 @@ function ip_in_range(string $IP, string $CIDR): bool
 {
     list($net, $mask) = explode("/", $CIDR);
 
-    $ip_net = ip2long($net);
+    $ip_net = str_contains($net, ":") ? ip2long_v6($net) : ip2long($net);
+
     $ip_mask = ~((1 << (32 - $mask)) - 1);
 
     $ip_ip = ip2long($IP);
@@ -44,6 +68,7 @@ function ip_in_range(string $IP, string $CIDR): bool
 
     return ($ip_ip_net == $ip_net);
 }
+
 
 /**
  * Delete an entire file heirachy
