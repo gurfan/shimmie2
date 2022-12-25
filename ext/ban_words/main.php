@@ -57,8 +57,9 @@ xanax
 
     public function onUserCreation(UserCreationEvent $event)
     {
-        $this-test_text($event->username, new UserCreationException("User creation has been blocked."));
+        $this->test_text($event->username, new UserCreationException("User creation has been blocked."));
     }
+
 
     public function onSetupBuilding(SetupBuildingEvent $event)
     {
