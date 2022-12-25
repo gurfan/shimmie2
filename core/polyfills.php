@@ -63,7 +63,7 @@ function ip_in_range(string $IP, string $CIDR): bool
 
     $ip_mask = $ipv6 ? ~((1 << (128 - $mask)) - 1) : ~((1 << (32 - $mask)) - 1);
 
-    $ip_ip = $ipv6 ? ip2long_v6 : ip2long($IP);
+    $ip_ip = $ipv6 ? ip2long_v6($IP) : ip2long($IP);
 
     $ip_ip_net = $ip_ip & $ip_mask;
 
