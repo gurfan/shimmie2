@@ -61,8 +61,8 @@ class NotATag extends Extension
         if ($user->can(Permissions::BAN_IMAGE)) {
             $event->tags = $this->strip($event->tags);
         } else {
-            //$this->scan($event->tags);
-            $event->tags = $this->strip($event->tags);
+            $this->scan($event->tags);
+            //$event->tags = $this->strip($event->tags);
         }
     }
 
@@ -88,17 +88,21 @@ class NotATag extends Extension
 
             $found = false;
             foreach ($tags as $tag_used) {
-                if (strpos($tag_used, strtolower((string)$tag)) !== false) {
-                    $found = true;
-                    break;
-                }
-                if(preg_match((string)$tag, $tag_used) != false) {
-                    $found = true;
-                    break;
+                $tag_used = strtolower((string)$tag_used))
+                if($tag[0] == '/') {
+                    if(preg_match($tag, $tag_used) != false) {
+                        $found = true;
+                        break;
+                    }
+                } else {
+                    if (strpos($tag_used, $tag)) !== false) {
+                        $found = true;
+                        break;
+                    }
                 }
             }
             if($found === true) {
-                throw new TagSetException("Invalid tag used: $tag", $url);
+                throw new TagSetException("Tag contains banned terms");
             }
         }
     }
@@ -120,13 +124,17 @@ class NotATag extends Extension
             */
             $found = false;
             foreach ($untags as $untag) {
-                if (strpos(strtolower((string)$tag), $untag) !== false) {
-                    $found = true;
-                    break;
-                }
-                if(preg_match($untag,(string)$tag ) != false) {
-                    $found = true;
-                    break;
+                $tag = strtolower((string)$tag)
+                if($untag[0] == '/') {
+                    if(preg_match($untag,(string)$tag ) != false) {
+                        $found = true;
+                        break;
+                    }
+                } else {
+                    if (strpos($tag , $untag) !== false) {
+                        $found = true;
+                        break;
+                    }
                 }
             }
             if($found === false) {
