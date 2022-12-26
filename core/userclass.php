@@ -79,7 +79,7 @@ new UserClass("user", "base", [
     Permissions::CREATE_IMAGE => true,
     Permissions::CREATE_COMMENT => true,
     Permissions::EDIT_IMAGE_TAG => true,
-   Permissions::EDIT_IMAGE_SOURCE => true,
+    Permissions::EDIT_IMAGE_SOURCE => false,
     Permissions::EDIT_IMAGE_TITLE => true,
     Permissions::EDIT_IMAGE_RELATIONSHIPS => true,
     Permissions::EDIT_IMAGE_ARTIST => true,
