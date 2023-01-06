@@ -77,7 +77,7 @@ new UserClass("anonymous", "base", [
 new UserClass("user", "base", [
     Permissions::BIG_SEARCH => true,
     Permissions::CREATE_IMAGE => true,
-    Permissions::CREATE_COMMENT => true,
+    Permissions::CREATE_COMMENT => false,
     Permissions::EDIT_IMAGE_TAG => true,
     Permissions::EDIT_IMAGE_SOURCE => false,
     Permissions::EDIT_IMAGE_TITLE => true,
