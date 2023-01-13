@@ -53,7 +53,7 @@ class RandomImage extends Extension
     {
         global $config, $page;
         if ($config->get_bool("show_random_block")) {
-            $image = Image::by_random($event->search_terms);
+            $image = Image::by_random(array_push($event->search_terms, "-rating:explicit"));
             if (!is_null($image)) {
                 $this->theme->display_random($page, $image);
             }
