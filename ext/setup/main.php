@@ -359,9 +359,10 @@ class Setup extends Extension
 				var http_request = new XMLHttpRequest();
 				http_request.open('GET', '$test_url', false);
 				http_request.send(null);
-                console.log(http_request.responseText);
-                console.log(http_request.status);
-				if(http_request.status === 200 && http_request.responseText === 'ok') {
+                //console.log(http_request.responseText);
+                //console.log(http_request.status);
+				//if(http_request.status === 200 && http_request.responseText === 'ok') {
+                if(http_request.status === 200) {
 					checkbox.disabled = false;
 					out_span.innerHTML = '(tested ok)';
 				}
