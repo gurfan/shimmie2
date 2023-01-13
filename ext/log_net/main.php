@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Shimmie2;
+
 class LogNet extends Extension
 {
     private int $count = 0;
@@ -42,7 +44,7 @@ class LogNet extends Extension
             }
             fwrite($fp, "$data\n");
             fclose($fp);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             /* logging errors shouldn't break everything */
         }
     }
