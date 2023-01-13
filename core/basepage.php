@@ -1,6 +1,9 @@
 <?php
 
 declare(strict_types=1);
+
+namespace Shimmie2;
+
 require_once "core/event.php";
 
 enum PageMode: string
@@ -255,7 +258,7 @@ class BasePage
             case PageMode::MANUAL:
                 break;
             case PageMode::PAGE:
-                usort($this->blocks, "blockcmp");
+                usort($this->blocks, "Shimmie2\blockcmp");
                 $this->add_auto_html_headers();
                 $this->render();
                 break;
@@ -270,6 +273,7 @@ class BasePage
                 if (!is_null($this->filename)) {
                     header('Content-Disposition: ' . $this->disposition . '; filename=' . $this->filename);
                 }
+                assert($this->file, "file should not be null with PageMode::FILE");
 
                 // https://gist.github.com/codler/3906826
                 $size = filesize($this->file); // File size
@@ -469,8 +473,8 @@ class BasePage
         }
 
         $sub_links = $sub_links??[];
-        usort($nav_links, "sort_nav_links");
-        usort($sub_links, "sort_nav_links");
+        usort($nav_links, "Shimmie2\sort_nav_links");
+        usort($sub_links, "Shimmie2\sort_nav_links");
 
         return [$nav_links, $sub_links];
     }

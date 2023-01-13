@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Shimmie2;
+
 require_once "config.php";
 /*
 * This is used by the image transcoding code when there is an error while transcoding
@@ -180,7 +182,7 @@ class TranscodeImage extends Extension
                     $new_image = $this->transcode_image($event->tmpname, $mime, $target_mime);
                     $event->set_mime($target_mime);
                     $event->set_tmpname($new_image);
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     log_error("transcode", "Error while performing upload transcode: ".$e->getMessage());
                     // We don't want to interfere with the upload process,
                     // so if something goes wrong the untranscoded image jsut continues
@@ -293,11 +295,11 @@ class TranscodeImage extends Extension
                             $database->commit();
                             $total++;
                             $size_difference += ($before_size - $new_image->filesize);
-                        } catch (Exception $e) {
+                        } catch (\Exception $e) {
                             log_error("transcode", "Error while bulk transcode on item {$image->id} to $mime: ".$e->getMessage());
                             try {
                                 $database->rollback();
-                            } catch (Exception $e) {
+                            } catch (\Exception $e) {
                                 // is this safe? o.o
                             }
                         }

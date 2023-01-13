@@ -1,4 +1,9 @@
 <?php
+
+declare(strict_types=1);
+
+namespace Shimmie2;
+
 /**
  * Shimmie Installer
  *
@@ -29,7 +34,7 @@ function install()
     // Pull in necessary files
     require_once "vendor/autoload.php";
     global $_tracer;
-    $_tracer = new EventTracer();
+    $_tracer = new \EventTracer();
 
     require_once "core/exceptions.php";
     require_once "core/cacheengine.php";
@@ -49,7 +54,7 @@ function get_dsn()
 {
     if (getenv("INSTALL_DSN")) {
         $dsn = getenv("INSTALL_DSN");
-    } elseif (@$_POST["database_type"] == DatabaseDriverID::SQLITE) {
+    } elseif (@$_POST["database_type"] == DatabaseDriverID::SQLITE->value) {
         /** @noinspection PhpUnhandledExceptionInspection */
         $id = bin2hex(random_bytes(5));
         $dsn = "sqlite:data/shimmie.{$id}.sqlite";
@@ -97,7 +102,7 @@ function ask_questions()
 		";
     }
 
-    $drivers = PDO::getAvailableDrivers();
+    $drivers = \PDO::getAvailableDrivers();
     if (
         !in_array(DatabaseDriverID::MYSQL->value, $drivers) &&
         !in_array(DatabaseDriverID::PGSQL->value, $drivers) &&
@@ -287,7 +292,7 @@ function create_tables(Database $db)
         if ($db->is_transaction_open()) {
             $db->commit();
         }
-    } catch (PDOException $e) {
+    } catch (\PDOException $e) {
         throw new InstallerException(
             "PDO Error:",
             "<p>An error occurred while trying to create the database tables necessary for Shimmie.</p>

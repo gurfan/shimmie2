@@ -1,6 +1,9 @@
 <?php
 
 declare(strict_types=1);
+
+namespace Shimmie2;
+
 use enshrined\svgSanitize\Sanitizer;
 
 class SVGFileHandler extends DataHandlerExtension
@@ -93,7 +96,7 @@ class MiniSVGParser
         xml_parser_free($xml_parser);
     }
 
-    public function startElement($parser, $name, $attrs)
+    public function startElement($parser, $name, $attrs): void
     {
         if ($name == "SVG" && $this->xml_depth == 0) {
             $this->width = int_escape($attrs["WIDTH"]);
@@ -102,7 +105,7 @@ class MiniSVGParser
         $this->xml_depth++;
     }
 
-    public function endElement($parser, $name)
+    public function endElement($parser, $name): void
     {
         $this->xml_depth--;
     }

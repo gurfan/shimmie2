@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Shimmie2;
+
 require_once "vendor/ifixit/php-akismet/akismet.class.php";
 
 class CommentPostingEvent extends Event
@@ -550,7 +552,7 @@ class CommentList extends Extension
                 'user_agent'   => $_SERVER['HTTP_USER_AGENT'] ?? 'none',
             ];
 
-            $akismet = new Akismet(
+            $akismet = new \Akismet(
                 $_SERVER['SERVER_NAME'],
                 $config->get_string('comment_wordpress_key'),
                 $comment

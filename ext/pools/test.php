@@ -1,6 +1,9 @@
 <?php
 
 declare(strict_types=1);
+
+namespace Shimmie2;
+
 class PoolsTest extends ShimmiePHPUnitTestCase
 {
     public function setUp(): void
@@ -76,8 +79,7 @@ class PoolsTest extends ShimmiePHPUnitTestCase
     /** @depends testCreate */
     public function testList($args)
     {
-        [$pool_id, $image_ids] = $this->testCreate();
-
+        $this->testCreate();
         $this->get_page("pool/list");
         $this->assert_text("Pool");
     }
