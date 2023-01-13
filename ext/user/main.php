@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Shimmie2;
+
 require_once "events.php";
 
 use MicroHTML\HTMLElement;
@@ -440,7 +442,7 @@ class UserPage extends Extension
         $duser = User::by_name_and_pass($name, $pass);
         if (!is_null($duser)) {
             send_event(new UserLoginEvent($duser));
-            $this->set_login_cookie($duser->name, $pass);
+            $this->set_login_cookie($duser->name);
             $page->set_mode(PageMode::REDIRECT);
 
             // Try returning to previous page
@@ -508,7 +510,7 @@ class UserPage extends Extension
 
                 $uce = new UserCreationEvent($_POST['name'], $_POST['pass1'], $_POST['email'], true);
                 send_event($uce);
-                $this->set_login_cookie($uce->username, $uce->password);
+                $this->set_login_cookie($uce->username);
                 $page->set_mode(PageMode::REDIRECT);
                 $page->set_redirect(make_link("user"));
             } catch (UserCreationException $ex) {
@@ -558,7 +560,7 @@ class UserPage extends Extension
         return $new_user;
     }
 
-    private function set_login_cookie(string $name, string $pass): void
+    private function set_login_cookie(string $name): void
     {
         global $config, $page;
 
@@ -637,7 +639,7 @@ class UserPage extends Extension
                 $duser->set_password($pass1);
 
                 if ($duser->id == $user->id) {
-                    $this->set_login_cookie($duser->name, $pass1);
+                    $this->set_login_cookie($duser->name);
                 }
 
                 $page->flash("Password changed");
@@ -697,7 +699,7 @@ class UserPage extends Extension
 
     private function count_log_ips(User $duser): array
     {
-        if (!class_exists('LogDatabase')) {
+        if (!class_exists('Shimmie2\LogDatabase')) {
             return [];
         }
         global $database;
