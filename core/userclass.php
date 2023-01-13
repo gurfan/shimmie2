@@ -75,12 +75,16 @@ new UserClass("ghost", "base", [
 // the admin might grant them some permissions
 new UserClass("anonymous", "base", [
     Permissions::CREATE_USER => true,
+    Permissions::CREATE_COMMENT => true,
+    Permissions::CREATE_IMAGE => true,
+    Permissions::EDIT_IMAGE_TAG => true,
+    Permissions::EDIT_IMAGE_RATING => true,
 ]);
 
 new UserClass("user", "base", [
     Permissions::BIG_SEARCH => true,
     Permissions::CREATE_IMAGE => true,
-    Permissions::CREATE_COMMENT => false,
+    Permissions::CREATE_COMMENT => true,
     Permissions::EDIT_IMAGE_TAG => true,
     Permissions::EDIT_IMAGE_SOURCE => false,
     Permissions::EDIT_IMAGE_TITLE => true,
