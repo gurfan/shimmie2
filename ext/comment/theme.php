@@ -1,9 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
-namespace Shimmie2;
-
 class CommentListTheme extends Themelet
 {
     private bool $show_anon_id = false;

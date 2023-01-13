@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class CustomHtmlHeadersInfo extends ExtensionInfo
 {
     public const KEY = "custom_html_headers";

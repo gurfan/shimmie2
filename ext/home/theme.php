@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class HomeTheme extends Themelet
 {
     public function display_page(Page $page, string $sitename, string $base_href, string $theme_name, string $body): void

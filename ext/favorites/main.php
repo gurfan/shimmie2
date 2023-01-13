@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class FavoriteSetEvent extends Event
 {
     public int $image_id;

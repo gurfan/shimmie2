@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class EmoticonListInfo extends ExtensionInfo
 {
     public const KEY = "emoticons_list";

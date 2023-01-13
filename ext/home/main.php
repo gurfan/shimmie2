@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class Home extends Extension
 {
     /** @var HomeTheme */
@@ -66,10 +64,10 @@ class Home extends Extension
             $main_links = $config->get_string('home_links');
         } else {
             $main_links = '[url=site://post/list]Posts[/url][url=site://comment/list]Comments[/url][url=site://tags]Tags[/url]';
-            if (class_exists("Shimmie2\Pools")) {
+            if (class_exists("Pools")) {
                 $main_links .= '[url=site://pool/list]Pools[/url]';
             }
-            if (class_exists("Shimmie2\Wiki")) {
+            if (class_exists("Wiki")) {
                 $main_links .= '[url=site://wiki]Wiki[/url]';
             }
             $main_links .= '[url=site://ext_doc]Documentation[/url]';

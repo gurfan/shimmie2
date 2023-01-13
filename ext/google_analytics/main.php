@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class GoogleAnalytics extends Extension
 {
     # Add analytics to config

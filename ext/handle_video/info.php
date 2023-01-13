@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class VideoFileHandlerInfo extends ExtensionInfo
 {
     public const KEY = "handle_video";

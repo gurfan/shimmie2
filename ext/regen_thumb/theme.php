@@ -1,9 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
-namespace Shimmie2;
-
 use function MicroHTML\INPUT;
 
 class RegenThumbTheme extends Themelet
@@ -44,7 +41,7 @@ class RegenThumbTheme extends Themelet
         $mimes = [];
         $results = $database->get_all("SELECT mime, count(*) count FROM images group by mime");
         foreach ($results as $result) {
-            $mimes[] = "<option value='" . $result["mime"] . "'>" . $result["mime"] . " (" . $result["count"] . ")</option>";
+            array_push($mimes, "<option value='".$result["mime"]."'>".$result["mime"]." (".$result["count"].")</option>");
         }
 
         $html = "

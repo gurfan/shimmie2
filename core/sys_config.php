@@ -1,9 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
-namespace Shimmie2;
-
 /**
  * For any values that aren't defined in data/config/*.php,
  * Shimmie will set the values to their defaults

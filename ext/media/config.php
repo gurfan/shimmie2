@@ -1,9 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
-namespace Shimmie2;
-
 abstract class MediaConfig
 {
     public const FFMPEG_PATH = "media_ffmpeg_path";

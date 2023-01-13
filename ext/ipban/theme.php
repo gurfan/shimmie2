@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class IPBanTheme extends Themelet
 {
     public function display_bans(Page $page, $table, $paginator)

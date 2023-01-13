@@ -1,9 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
-namespace Shimmie2;
-
 class NotesTheme extends Themelet
 {
     public function note_button(int $image_id): string

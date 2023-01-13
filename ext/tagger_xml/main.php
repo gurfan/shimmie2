@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 // Tagger AJAX back-end
 class TaggerXML extends Extension
 {
@@ -97,7 +95,7 @@ class TaggerXML extends Extension
         return $this->list_to_xml($tags, "image", (string)$image_id);
     }
 
-    private function list_to_xml(\FFSPHP\PDOStatement $tags, string $type, string $query, ?array$misc=null): string
+    private function list_to_xml(PDOStatement $tags, string $type, string $query, ?array$misc=null): string
     {
         $r = $tags->_numOfRows;
 
@@ -115,7 +113,7 @@ class TaggerXML extends Extension
         return $result."</list>";
     }
 
-    private function tag_to_xml(\PDORow $tag): string
+    private function tag_to_xml(PDORow $tag): string
     {
         return
             "<tag  ".

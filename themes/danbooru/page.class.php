@@ -1,9 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
-namespace Shimmie2;
-
 /**
  * Name: Danbooru Theme
  * Author: Bzchan <bzchan@animemahou.com>

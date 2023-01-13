@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class LiveFeed extends Extension
 {
     public function onSetupBuilding(SetupBuildingEvent $event)
@@ -68,7 +66,7 @@ class LiveFeed extends Extension
             }
             fwrite($fp, "$data\n");
             fclose($fp);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             /* logging errors shouldn't break everything */
         }
     }

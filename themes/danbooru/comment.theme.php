@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class CustomCommentListTheme extends CommentListTheme
 {
     public function display_comment_list(array $images, int $page_number, int $total_pages, bool $can_post)

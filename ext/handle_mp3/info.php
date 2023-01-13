@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class MP3FileHandlerInfo extends ExtensionInfo
 {
     public const KEY = "handle_mp3";

@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class TranscodeVideoConfig
 {
     public const ENABLED = "transcode_video_enabled";

@@ -1,9 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
-namespace Shimmie2;
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
 * Event API                                                                 *
 \* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -40,7 +37,7 @@ function _set_event_listeners(): void
     global $_shm_event_listeners;
     $_shm_event_listeners = [];
 
-    foreach (get_subclasses_of("Shimmie2\Extension") as $class) {
+    foreach (get_subclasses_of("Extension") as $class) {
         /** @var Extension $extension */
         $extension = new $class();
 
@@ -62,25 +59,19 @@ function _set_event_listeners(): void
     }
 }
 
-function _namespaced_class_name(string $class): string
-{
-    return str_replace("Shimmie2\\", "", $class);
-}
-
 function _dump_event_listeners(array $event_listeners, string $path): void
 {
-    $p = "<"."?php\nnamespace Shimmie2;\n";
+    $p = "<"."?php\n";
 
-    foreach (get_subclasses_of("Shimmie2\Extension") as $class) {
-        $scn = _namespaced_class_name($class);
-        $p .= "\$$scn = new $scn(); ";
+    foreach (get_subclasses_of("Extension") as $class) {
+        $p .= "\$$class = new $class(); ";
     }
 
     $p .= "\$_shm_event_listeners = array(\n";
     foreach ($event_listeners as $event => $listeners) {
         $p .= "\t'$event' => array(\n";
         foreach ($listeners as $id => $listener) {
-            $p .= "\t\t$id => \$"._namespaced_class_name(get_class($listener)).",\n";
+            $p .= "\t\t$id => \$".get_class($listener).",\n";
         }
         $p .= "\t),\n";
     }
@@ -102,11 +93,10 @@ function send_event(Event $event): Event
     global $tracer_enabled;
 
     global $_shm_event_listeners, $_shm_event_count, $_tracer;
-    $event_name = _namespaced_class_name(get_class($event));
-    if (!isset($_shm_event_listeners[$event_name])) {
+    if (!isset($_shm_event_listeners[get_class($event)])) {
         return $event;
     }
-    $method_name = "on".str_replace("Event", "", $event_name);
+    $method_name = "on".str_replace("Event", "", get_class($event));
 
     // send_event() is performance sensitive, and with the number
     // of times tracer gets called the time starts to add up
@@ -114,7 +104,7 @@ function send_event(Event $event): Event
         $_tracer->begin(get_class($event));
     }
     // SHIT: https://bugs.php.net/bug.php?id=35106
-    $my_event_listeners = $_shm_event_listeners[$event_name];
+    $my_event_listeners = $_shm_event_listeners[get_class($event)];
     ksort($my_event_listeners);
 
     foreach ($my_event_listeners as $listener) {

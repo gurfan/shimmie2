@@ -2,12 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 /**
  * A base exception to be caught by the upper levels.
  */
-class SCoreException extends \RuntimeException
+class SCoreException extends RuntimeException
 {
     public ?string $query;
     public string $error;
@@ -21,7 +19,7 @@ class SCoreException extends \RuntimeException
     }
 }
 
-class InstallerException extends \RuntimeException
+class InstallerException extends RuntimeException
 {
     public string $title;
     public string $body;

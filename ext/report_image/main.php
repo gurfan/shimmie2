@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class RemoveReportedImageEvent extends Event
 {
     public int $id;

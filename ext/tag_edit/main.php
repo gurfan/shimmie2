@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 /*
  * OwnerSetEvent:
  *   $image_id
@@ -38,7 +36,7 @@ class SourceSetEvent extends Event
 }
 
 
-class TagSetException extends UserErrorException
+class TagSetException extends SCoreException
 {
     public ?string $redirect;
 
@@ -70,7 +68,7 @@ class TagSetEvent extends Event
             if ((!str_contains($tag, ':')) && (!str_contains($tag, '='))) {
                 //Tag doesn't contain : or =, meaning it can't possibly be a metatag.
                 //This should help speed wise, as it avoids running every single tag through a bunch of preg_match instead.
-                $this->tags[] = $tag;
+                array_push($this->tags, $tag);
                 continue;
             }
 
@@ -79,9 +77,9 @@ class TagSetEvent extends Event
 
             //seperate tags from metatags
             if (!$ttpe->metatag) {
-                $this->tags[] = $tag;
+                array_push($this->tags, $tag);
             } else {
-                $this->metatags[] = $tag;
+                array_push($this->metatags, $tag);
             }
         }
     }
@@ -287,7 +285,7 @@ class TagEdit extends Extension
     {
         $tags = $event->image->get_tag_list();
         $tags = str_replace("/", "", $tags);
-        $tags = ltrim($tags, ".");
+        $tags = preg_replace("/^\.+/", "", $tags);
         $event->replace('$tags', $tags);
     }
 

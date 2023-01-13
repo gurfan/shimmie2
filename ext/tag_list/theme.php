@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class TagListTheme extends Themelet
 {
     public string $heading = "";
@@ -73,7 +71,7 @@ class TagListTheme extends Themelet
             asort($tag_infos);
         }
 
-        if (class_exists('Shimmie2\TagCategories')) {
+        if (class_exists('TagCategories')) {
             $this->tagcategories = new TagCategories();
             $tag_category_dict = $this->tagcategories->getKeyedDict();
         } else {
@@ -135,7 +133,7 @@ class TagListTheme extends Themelet
             asort($tag_infos);
         }
 
-        if (class_exists('Shimmie2\TagCategories')) {
+        if (class_exists('TagCategories')) {
             $this->tagcategories = new TagCategories();
             $tag_category_dict = $this->tagcategories->getKeyedDict();
         } else {

@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class RandomList extends Extension
 {
     /** @var RandomListTheme */
@@ -45,7 +43,7 @@ class RandomList extends Extension
                 if (!$random_image) {
                     continue;
                 }
-                $random_images[] = $random_image;
+                array_push($random_images, $random_image);
             }
 
             $this->theme->set_page($search_terms);

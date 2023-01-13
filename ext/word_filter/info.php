@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class WordFilterInfo extends ExtensionInfo
 {
     public const KEY = "word_filter";

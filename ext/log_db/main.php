@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 use MicroHTML\HTMLElement;
 use MicroCRUD\ActionColumn;
 use MicroCRUD\Column;
@@ -50,7 +48,7 @@ class ActorColumn extends Column
 
     public function get_sql_filter(): string
     {
-        $driver = $this->table->db->getAttribute(\PDO::ATTR_DRIVER_NAME);
+        $driver = $this->table->db->getAttribute(PDO::ATTR_DRIVER_NAME);
         switch ($driver) {
             case "pgsql":
                 return "((LOWER(username) = LOWER(:{$this->name}_0)) OR (address && cast(:{$this->name}_1 as inet)))";

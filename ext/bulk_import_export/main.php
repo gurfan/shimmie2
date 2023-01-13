@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
 
 class BulkImportExport extends DataHandlerExtension
 {
@@ -17,7 +16,7 @@ class BulkImportExport extends DataHandlerExtension
 
         if ($this->supported_mime($event->mime) &&
             $user->can(Permissions::BULK_IMPORT)) {
-            $zip = new \ZipArchive();
+            $zip = new ZipArchive();
 
             if ($zip->open($event->tmpname) === true) {
                 $json_data = $this->get_export_data($zip);
@@ -71,11 +70,11 @@ class BulkImportExport extends DataHandlerExtension
 
                         $database->commit();
                         $total++;
-                    } catch (\Exception $ex) {
+                    } catch (Exception $ex) {
                         $failed++;
                         try {
                             $database->rollBack();
-                        } catch (\Exception $ex2) {
+                        } catch (Exception $ex2) {
                             log_error(BulkImportExportInfo::KEY, "Could not roll back transaction: " . $ex2->getMessage(), "Could not import " . $item->hash . ": " . $ex->getMessage());
                         }
                         log_error(BulkImportExportInfo::KEY, "Could not import " . $item->hash . ": " . $ex->getMessage(), "Could not import " . $item->hash . ": " . $ex->getMessage());
@@ -118,11 +117,11 @@ class BulkImportExport extends DataHandlerExtension
             ($event->action == self::EXPORT_ACTION_NAME)) {
             $download_filename = $user->name . '-' . date('YmdHis') . '.zip';
             $zip_filename = tempnam(sys_get_temp_dir(), "shimmie_bulk_export");
-            $zip = new \ZipArchive();
+            $zip = new ZipArchive();
 
             $json_data = [];
 
-            if ($zip->open($zip_filename, \ZIPARCHIVE::CREATE | \ZIPARCHIVE::OVERWRITE) === true) {
+            if ($zip->open($zip_filename, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE) === true) {
                 foreach ($event->items as $image) {
                     $img_loc = warehouse_path(Image::IMAGE_DIR, $image->hash, false);
 
@@ -134,7 +133,7 @@ class BulkImportExport extends DataHandlerExtension
                     $data["filename"] = $image->filename;
                     $data["source"] = $image->source;
 
-                    $json_data[] = $data;
+                    array_push($json_data, $data);
 
                     $zip->addFile($img_loc, $image->hash);
                 }
@@ -167,17 +166,17 @@ class BulkImportExport extends DataHandlerExtension
         return false;
     }
 
-    private function get_export_data(\ZipArchive $zip): ?array
+    private function get_export_data(ZipArchive $zip): ?array
     {
         $info = $zip->getStream(self::EXPORT_INFO_FILE_NAME);
         if ($info !== false) {
             try {
                 $json_string = stream_get_contents($info);
                 $json_data = json_decode($json_string);
-                return $json_data;
             } finally {
                 fclose($info);
             }
+            return $json_data;
         } else {
             return null;
         }

@@ -1,9 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
-namespace Shimmie2;
-
 use function MicroHTML\INPUT;
 use function MicroHTML\DIV;
 use function MicroHTML\A;

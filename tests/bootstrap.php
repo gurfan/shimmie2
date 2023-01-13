@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 use PHPUnit\Framework\TestCase;
 
 chdir(dirname(dirname(__FILE__)));
@@ -22,7 +20,7 @@ if (file_exists("tests/trace.json")) {
 global $cache, $config, $database, $user, $page, $_tracer;
 _set_up_shimmie_environment();
 $tracer_enabled = true;
-$_tracer = new \EventTracer();
+$_tracer = new EventTracer();
 $_tracer->begin("bootstrap");
 _load_core_files();
 $cache = new Cache(CACHE_DSN);
@@ -128,7 +126,7 @@ abstract class ShimmiePHPUnitTestCase extends TestCase
         $post_args = self::check_args($post_args);
 
         if (str_contains($page_name, "?")) {
-            throw new \RuntimeException("Query string included in page name");
+            throw new RuntimeException("Query string included in page name");
         }
         $_SERVER['REQUEST_URI'] = make_link($page_name, http_build_query($get_args));
         $_GET = $get_args;
@@ -191,7 +189,8 @@ abstract class ShimmiePHPUnitTestCase extends TestCase
         } elseif ($page->mode == PageMode::DATA) {
             return $page->data;
         } else {
-            $this->fail("Page mode is not PAGE or DATA");
+            $this->assertTrue(false, "Page mode is not PAGE or DATA");
+            return "";
         }
     }
 
@@ -254,7 +253,6 @@ abstract class ShimmiePHPUnitTestCase extends TestCase
             "source" => null,
         ]);
         send_event($dae);
-        // if($dae->image_id == -1) throw new \Exception("Upload failed :(");
         return $dae->image_id;
     }
 

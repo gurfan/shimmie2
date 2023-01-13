@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 require_once "events/displaying_image_event.php";
 require_once "events/image_info_box_building_event.php";
 require_once "events/image_info_set_event.php";

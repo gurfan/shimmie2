@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 use function MicroHTML\FORM;
 use function MicroHTML\INPUT;
 use function MicroHTML\P;

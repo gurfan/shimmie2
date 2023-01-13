@@ -1,9 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Shimmie2;
-
 class CustomTagEditTheme extends TagEditTheme
 {
     public function get_tag_editor_html(Image $image): string
@@ -13,7 +9,7 @@ class CustomTagEditTheme extends TagEditTheme
 			<tr>
 				<th width='50px'><a href='".make_link("tag_history/{$image->id}")."'>Tags</a></th>
 				<td>
-					<input type='text' name='tag_edit__tags' value='$h_tags'>
+					<input type='text' name='tag_edit__tags' value='$h_tags' id='tag_editor' class='autocomplete_tags' onfocus='$(\".view\").hide(); $(\".edit\").show();'>
 				</td>
 			</tr>
 		";

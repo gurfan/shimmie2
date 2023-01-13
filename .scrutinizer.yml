@@ -6,7 +6,6 @@ filter:
   excluded_paths: [ext/*/lib/*,ext/tagger/script.js,tests/*]
 
 build:
-  image: default-bionic
   nodes:
     analysis:
       tests:

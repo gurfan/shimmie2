@@ -1,9 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
-namespace Shimmie2;
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
 * Make sure that shimmie is correctly installed                             *
 \* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -43,7 +38,7 @@ require_once "core/util.php";
 
 global $cache, $config, $database, $user, $page, $_tracer;
 _set_up_shimmie_environment();
-$_tracer = new \EventTracer();
+$_tracer = new EventTracer();
 $_tracer->begin("Bootstrap");
 _load_core_files();
 $cache = new Cache(CACHE_DSN);
@@ -56,6 +51,7 @@ _load_theme_files();
 $page = new Page();
 _load_event_listeners();
 $_tracer->end();
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
 * Send events, display output                                               *
@@ -95,7 +91,7 @@ try {
     if (function_exists("fastcgi_finish_request")) {
         fastcgi_finish_request();
     }
-} catch (\Exception $e) {
+} catch (Exception $e) {
     if ($database && $database->is_transaction_open()) {
         $database->rollback();
     }
@@ -107,7 +103,7 @@ try {
             empty($_SERVER["REQUEST_URI"])
             || (@$_GET["trace"] == "on")
             || (
-                (ftime() - $_shm_load_start) > TRACE_THRESHOLD
+                (microtime(true) - $_shm_load_start) > TRACE_THRESHOLD
                 && ($_SERVER["REQUEST_URI"] ?? "") != "/upload"
             )
         ) {

@@ -1,9 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
-namespace Shimmie2;
-
 class UploadTest extends ShimmiePHPUnitTestCase
 {
     public function testUploadPage()
@@ -107,7 +104,7 @@ class UploadTest extends ShimmiePHPUnitTestCase
         file_put_contents("data/huge.jpg", file_get_contents("tests/pbx_screenshot.jpg") . str_repeat("U", 1024*1024*3));
         try {
             $this->post_image("data/huge.jpg", "test");
-            $this->fail("Uploading huge.jpg didn't fail...");
+            $this->assertTrue(false, "Uploading huge.jpg didn't fail...");
         } catch (UploadException $e) {
             $this->assertEquals("File too large (3.0MB > 1.0MB)", $e->error);
         }

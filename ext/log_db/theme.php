@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class LogDatabaseTheme extends Themelet
 {
     public function display_events($table, $paginator)

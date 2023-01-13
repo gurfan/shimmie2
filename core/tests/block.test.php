@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 use PHPUnit\Framework\TestCase;
 
 require_once "core/block.php";

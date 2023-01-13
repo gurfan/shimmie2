@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class WikiUpdateEvent extends Event
 {
     public User $user;
@@ -268,7 +266,7 @@ class Wiki extends Extension
                     "title"=>$wpage->title, "locked"=>$wpage->locked, "body"=>$wpage->body]
                 );
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw new WikiUpdateException("Somebody else edited that page at the same time :-(");
         }
     }
@@ -376,7 +374,7 @@ class Wiki extends Extension
         return new WikiPage($row);
     }
 
-    public static function format_tag_wiki_page(WikiPage $page): string
+    public static function format_tag_wiki_page(WikiPage $page)
     {
         global $database, $config;
 
@@ -390,7 +388,7 @@ class Wiki extends Extension
             $template = $config->get_string(WikiConfig::TAG_PAGE_TEMPLATE);
 
             //CATEGORIES
-            if (class_exists("Shimmie2\TagCategories")) {
+            if (class_exists("TagCategories")) {
                 $tagcategories = new TagCategories();
                 $tag_category_dict = $tagcategories->getKeyedDict();
             }
@@ -413,7 +411,7 @@ class Wiki extends Extension
             $template = format_text($template);
             //Things after this line will NOT be escaped!!! Be careful what you add.
 
-            if (class_exists("Shimmie2\AutoTagger")) {
+            if (class_exists("AutoTagger")) {
                 $auto_tags = $database->get_one("
                     SELECT additional_tags
                     FROM auto_tag
@@ -434,7 +432,7 @@ class Wiki extends Extension
                                 ", ["title"=>$a_tag]);
 
                         $tag_html = $tag_list_t->return_tag($a_row, $tag_category_dict ?? []);
-                        $f_auto_tags[] = $tag_html[1];
+                        array_push($f_auto_tags, $tag_html[1]);
                     }
 
                     $template = str_replace("{autotags}", implode(", ", $f_auto_tags), $template);
@@ -677,7 +675,7 @@ class Wiki extends Extension
                 return "--- $value\n";
 
             default:
-                throw new \RuntimeException("stat needs to be =, + or -");
+                throw new RuntimeException("stat needs to be =, + or -");
         }
     }
 }
