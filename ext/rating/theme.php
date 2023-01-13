@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class RatingsTheme extends Themelet
 {
     public function get_rater_html(int $image_id, string $rating, bool $can_rate): string

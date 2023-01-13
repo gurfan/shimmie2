@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 use function MicroHTML\LABEL;
 use function MicroHTML\TABLE;
 use function MicroHTML\TBODY;
@@ -125,7 +123,7 @@ class CronUploaderTheme extends Themelet
         }
     }
 
-    public function get_user_options(): string
+    public function get_user_options(string $dir, bool $stop_on_error, int $log_level, bool $all_logs): string
     {
         $form = SHM_SIMPLE_FORM(
             "user_admin/cron_uploader",

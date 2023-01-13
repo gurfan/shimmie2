@@ -1,11 +1,7 @@
 <?php
 
 declare(strict_types=1);
-
-namespace Shimmie2;
-
 use FFSPHP\PDO;
-use FFSPHP\PDOStatement;
 
 enum DatabaseDriverID: string
 {
@@ -46,7 +42,7 @@ class Database
     {
         $this->db = new PDO($this->dsn);
         $this->connect_engine();
-        $this->get_engine()->init($this->db);
+        $this->engine->init($this->db);
         $this->begin_transaction();
     }
 
@@ -102,33 +98,31 @@ class Database
         }
     }
 
-    private function get_engine(): DBEngine
+    public function scoreql_to_sql(string $input): string
     {
         if (is_null($this->engine)) {
             $this->connect_engine();
         }
-        return $this->engine;
-    }
-
-    public function scoreql_to_sql(string $input): string
-    {
-        return $this->get_engine()->scoreql_to_sql($input);
+        return $this->engine->scoreql_to_sql($input);
     }
 
     public function get_driver_id(): DatabaseDriverID
     {
-        return $this->get_engine()->id;
+        if (is_null($this->engine)) {
+            $this->connect_engine();
+        }
+        return $this->engine->id;
     }
 
     public function get_version(): string
     {
-        return $this->get_engine()->get_version($this->db);
+        return $this->engine->get_version($this->db);
     }
 
     private function count_time(string $method, float $start, string $query, ?array $args): void
     {
         global $_tracer, $tracer_enabled;
-        $dur = ftime() - $start;
+        $dur = microtime(true) - $start;
         if ($tracer_enabled) {
             $query = trim(preg_replace('/^[\t ]+/m', '', $query));  // trim leading whitespace
             $_tracer->complete($start * 1000000, $dur * 1000000, "DB Query", ["query"=>$query, "args"=>$args, "method"=>$method]);
@@ -139,12 +133,12 @@ class Database
 
     public function set_timeout(?int $time): void
     {
-        $this->get_engine()->set_timeout($this->db, $time);
+        $this->engine->set_timeout($this->db, $time);
     }
 
     public function notify(string $channel, ?string $data=null): void
     {
-        $this->get_engine()->notify($this->db, $channel, $data);
+        $this->engine->notify($this->db, $channel, $data);
     }
 
     public function execute(string $query, array $args = []): PDOStatement
@@ -153,17 +147,12 @@ class Database
             if (is_null($this->db)) {
                 $this->connect_db();
             }
-            $ret = $this->db->execute(
+            return $this->db->execute(
                 "-- " . str_replace("%2F", "/", urlencode($_GET['q'] ?? '')). "\n" .
                 $query,
                 $args
             );
-            if ($ret === false) {
-                throw new SCoreException("Query failed", $query);
-            }
-            /** @noinspection PhpIncompatibleReturnTypeInspection */
-            return $ret;
-        } catch (\PDOException $pdoe) {
+        } catch (PDOException $pdoe) {
             throw new SCoreException($pdoe->getMessage(), $query);
         }
     }
@@ -173,7 +162,7 @@ class Database
      */
     public function get_all(string $query, array $args = []): array
     {
-        $_start = ftime();
+        $_start = microtime(true);
         $data = $this->execute($query, $args)->fetchAll();
         $this->count_time("get_all", $_start, $query, $args);
         return $data;
@@ -184,7 +173,7 @@ class Database
      */
     public function get_all_iterable(string $query, array $args = []): PDOStatement
     {
-        $_start = ftime();
+        $_start = microtime(true);
         $data = $this->execute($query, $args);
         $this->count_time("get_all_iterable", $_start, $query, $args);
         return $data;
@@ -195,7 +184,7 @@ class Database
      */
     public function get_row(string $query, array $args = []): ?array
     {
-        $_start = ftime();
+        $_start = microtime(true);
         $row = $this->execute($query, $args)->fetch();
         $this->count_time("get_row", $_start, $query, $args);
         return $row ? $row : null;
@@ -206,7 +195,7 @@ class Database
      */
     public function get_col(string $query, array $args = []): array
     {
-        $_start = ftime();
+        $_start = microtime(true);
         $res = $this->execute($query, $args)->fetchAll(PDO::FETCH_COLUMN);
         $this->count_time("get_col", $_start, $query, $args);
         return $res;
@@ -215,9 +204,9 @@ class Database
     /**
      * Execute an SQL query and return the first column of each row as a single iterable object.
      */
-    public function get_col_iterable(string $query, array $args = []): \Generator
+    public function get_col_iterable(string $query, array $args = []): Generator
     {
-        $_start = ftime();
+        $_start = microtime(true);
         $stmt = $this->execute($query, $args);
         $this->count_time("get_col_iterable", $_start, $query, $args);
         foreach ($stmt as $row) {
@@ -230,7 +219,7 @@ class Database
      */
     public function get_pairs(string $query, array $args = []): array
     {
-        $_start = ftime();
+        $_start = microtime(true);
         $res = $this->execute($query, $args)->fetchAll(PDO::FETCH_KEY_PAIR);
         $this->count_time("get_pairs", $_start, $query, $args);
         return $res;
@@ -240,9 +229,9 @@ class Database
     /**
      * Execute an SQL query and return the the first column => the second column as an iterable object.
      */
-    public function get_pairs_iterable(string $query, array $args = []): \Generator
+    public function get_pairs_iterable(string $query, array $args = []): Generator
     {
-        $_start = ftime();
+        $_start = microtime(true);
         $stmt = $this->execute($query, $args);
         $this->count_time("get_pairs_iterable", $_start, $query, $args);
         foreach ($stmt as $row) {
@@ -255,7 +244,7 @@ class Database
      */
     public function get_one(string $query, array $args = [])
     {
-        $_start = ftime();
+        $_start = microtime(true);
         $row = $this->execute($query, $args)->fetch();
         $this->count_time("get_one", $_start, $query, $args);
         return $row ? $row[0] : null;
@@ -266,7 +255,7 @@ class Database
      */
     public function exists(string $query, array $args = []): bool
     {
-        $_start = ftime();
+        $_start = microtime(true);
         $row = $this->execute($query, $args)->fetch();
         $this->count_time("exists", $_start, $query, $args);
         if ($row==null) {
@@ -280,7 +269,7 @@ class Database
      */
     public function get_last_insert_id(string $seq): int
     {
-        if ($this->get_engine()->id == DatabaseDriverID::PGSQL) {
+        if ($this->engine->id == DatabaseDriverID::PGSQL) {
             $id = $this->db->lastInsertId($seq);
         } else {
             $id = $this->db->lastInsertId();
@@ -298,7 +287,7 @@ class Database
             $this->connect_engine();
         }
         $data = trim($data, ", \t\n\r\0\x0B");  // mysql doesn't like trailing commas
-        $this->execute($this->get_engine()->create_table_sql($name, $data));
+        $this->execute($this->engine->create_table_sql($name, $data));
     }
 
     /**
@@ -312,20 +301,20 @@ class Database
             $this->connect_db();
         }
 
-        if ($this->get_engine()->id === DatabaseDriverID::MYSQL) {
+        if ($this->engine->id === DatabaseDriverID::MYSQL) {
             return count(
                 $this->get_all("SHOW TABLES")
             );
-        } elseif ($this->get_engine()->id === DatabaseDriverID::PGSQL) {
+        } elseif ($this->engine->id === DatabaseDriverID::PGSQL) {
             return count(
                 $this->get_all("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'")
             );
-        } elseif ($this->get_engine()->id === DatabaseDriverID::SQLITE) {
+        } elseif ($this->engine->id === DatabaseDriverID::SQLITE) {
             return count(
                 $this->get_all("SELECT name FROM sqlite_master WHERE type = 'table'")
             );
         } else {
-            throw new SCoreException("Can't count tables for database type {$this->get_engine()->id}");
+            throw new SCoreException("Can't count tables for database type {$this->engine->id}");
         }
     }
 

@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class NumericScoreTheme extends Themelet
 {
     public function get_voter(Image $image)

@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 abstract class PrivateImageConfig
 {
     public const VERSION = "ext_private_image_version";

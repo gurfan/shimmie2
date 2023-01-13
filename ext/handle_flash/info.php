@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class FlashFileHandlerInfo extends ExtensionInfo
 {
     public const KEY = "handle_flash";

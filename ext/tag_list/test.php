@@ -1,9 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
-namespace Shimmie2;
-
 class TagListTest extends ShimmiePHPUnitTestCase
 {
     private array $pages = ["map", "alphabetic", "popularity", "categories"];

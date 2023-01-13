@@ -1,9 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
-namespace Shimmie2;
-
 class ResolutionLimitTest extends ShimmiePHPUnitTestCase
 {
     public function testResLimitOK()
@@ -35,7 +32,7 @@ class ResolutionLimitTest extends ShimmiePHPUnitTestCase
         $this->log_in_as_user();
         try {
             $this->post_image("tests/pbx_screenshot.jpg", "pbx computer screenshot");
-            $this->fail("Invalid-size image was allowed");
+            $this->assertTrue(false, "Invalid-size image was allowed");
         } catch (UploadException $e) {
             $this->assertEquals("Post too small", $e->getMessage());
         }
@@ -52,7 +49,7 @@ class ResolutionLimitTest extends ShimmiePHPUnitTestCase
 
         try {
             $this->post_image("tests/pbx_screenshot.jpg", "pbx computer screenshot");
-            $this->fail("Invalid-size image was allowed");
+            $this->assertTrue(false, "Invalid-size image was allowed");
         } catch (UploadException $e) {
             $this->assertEquals("Post too large", $e->getMessage());
         }
@@ -69,7 +66,7 @@ class ResolutionLimitTest extends ShimmiePHPUnitTestCase
 
         try {
             $this->post_image("tests/pbx_screenshot.jpg", "pbx computer screenshot");
-            $this->fail("Invalid-size image was allowed");
+            $this->assertTrue(false, "Invalid-size image was allowed");
         } catch (UploadException $e) {
             $this->assertEquals("Post needs to be in one of these ratios: 16:9", $e->getMessage());
         }

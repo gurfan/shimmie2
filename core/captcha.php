@@ -1,9 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
-namespace Shimmie2;
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
 * CAPTCHA abstraction                                                       *
 \* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -27,7 +24,7 @@ function captcha_get_html(): string
 				<script type=\"text/javascript\" src=\"https://www.google.com/recaptcha/api.js\"></script>";
         } else {
             session_start();
-            $captcha = \Securimage::getCaptchaHtml(['securimage_path' => './vendor/dapphp/securimage/']);
+            $captcha = Securimage::getCaptchaHtml(['securimage_path' => './vendor/dapphp/securimage/']);
         }
     }
     return $captcha;
@@ -53,7 +50,7 @@ function captcha_check(): bool
             }
         } else {
             session_start();
-            $securimg = new \Securimage();
+            $securimg = new Securimage();
             if ($securimg->check($_POST['captcha_code']) === false) {
                 log_info("core", "Captcha failed (Securimage)");
                 return false;

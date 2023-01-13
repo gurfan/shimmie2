@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class BulkActionsInfo extends ExtensionInfo
 {
     public const KEY = "bulk_actions";

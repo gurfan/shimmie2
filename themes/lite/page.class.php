@@ -1,9 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
-namespace Shimmie2;
-
 /**
  * Name: Lite Theme
  * Author: Zach Hall <zach@sosguy.net>
@@ -77,7 +74,7 @@ class Page extends BasePage
             $custom_sublinks .= "</div>";
         }
 
-        if (!$this->left_enabled) {
+        if ($this->left_enabled == false) {
             $left_block_html = "";
             $main_block_html = "<article id='body_noleft'>{$main_block_html}</article>";
         } else {
@@ -117,12 +114,20 @@ EOD;
         $i = $block->id;
         $html = "<section id='{$i}'>";
         if (!is_null($h)) {
-            $html .= "<div class='navtop navside tab shm-toggler' data-toggle-sel='#{$i}'>{$h}</div>";
+            if ($salt == "main") {
+                $html .= "<div class='maintop navside tab shm-toggler' data-toggle-sel='#{$i}'>{$h}</div>";
+            } else {
+                $html .= "<div class='navtop navside tab shm-toggler' data-toggle-sel='#{$i}'>{$h}</div>";
+            }
         }
         if (!is_null($b)) {
-            $html .= "
-        		<div class='navside tab'>{$b}</div>
-		    ";
+            if ($salt =="main") {
+                $html .= "<div class='blockbody'>{$b}</div>";
+            } else {
+                $html .= "
+					<div class='navside tab'>{$b}</div>
+				";
+            }
         }
         $html .= "</section>";
         return $html;

@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class AuthorSetEvent extends Event
 {
     public Image $image;
@@ -166,7 +164,7 @@ class Artists extends Extension
                 //*************ARTIST SECTION**************
                 case "list":
                     {
-                        $this->get_listing($event);
+                        $this->get_listing($page, $event);
                         $this->theme->sidebar_options("neutral");
                         break;
                     }
@@ -847,7 +845,7 @@ class Artists extends Extension
     /*
     * HERE WE GET THE LIST OF ALL ARTIST WITH PAGINATION
     */
-    private function get_listing(PageRequestEvent $event)
+    private function get_listing(Page $page, PageRequestEvent $event)
     {
         global $config, $database;
 
@@ -1050,8 +1048,7 @@ class Artists extends Extension
             ORDER BY alias ASC
         ", ['artist_id'=>$artistID]);
 
-        $rc = count($result);
-        for ($i = 0 ; $i < $rc ; $i++) {
+        for ($i = 0 ; $i < count($result) ; $i++) {
             $result[$i]["alias_name"] = stripslashes($result[$i]["alias_name"]);
         }
         return $result;

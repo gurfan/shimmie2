@@ -1,9 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
-namespace Shimmie2;
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
 * Things which should be in the core API                                    *
 \* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -270,7 +267,7 @@ function get_subclasses_of(string $parent): array
 {
     $result = [];
     foreach (get_declared_classes() as $class) {
-        $rclass = new \ReflectionClass($class);
+        $rclass = new ReflectionClass($class);
         if (!$rclass->isAbstract() && is_subclass_of($class, $parent)) {
             $result[] = $class;
         }
@@ -336,12 +333,12 @@ function get_base_href(): string
 function unparse_url(array $parsed_url): string
 {
     $scheme   = isset($parsed_url['scheme']) ? $parsed_url['scheme'] . '://' : '';
-    $host     = $parsed_url['host'] ?? '';
+    $host     = isset($parsed_url['host']) ? $parsed_url['host'] : '';
     $port     = isset($parsed_url['port']) ? ':' . $parsed_url['port'] : '';
-    $user     = $parsed_url['user'] ?? '';
+    $user     = isset($parsed_url['user']) ? $parsed_url['user'] : '';
     $pass     = isset($parsed_url['pass']) ? ':' . $parsed_url['pass'] : '';
     $pass     = ($user || $pass) ? "$pass@" : '';
-    $path     = $parsed_url['path'] ?? '';
+    $path     = isset($parsed_url['path']) ? $parsed_url['path'] : '';
     $query    = !empty($parsed_url['query']) ? '?' . $parsed_url['query'] : '';
     $fragment = !empty($parsed_url['fragment']) ? '#' . $parsed_url['fragment'] : '';
     return "$scheme$user$pass$host$port$path$query$fragment";
@@ -774,7 +771,7 @@ function join_path(string ...$paths): string
 /**
  * Perform callback on each item returned by an iterator.
  */
-function iterator_map(callable $callback, \iterator $iter): \Generator
+function iterator_map(callable $callback, iterator $iter): Generator
 {
     foreach ($iter as $i) {
         yield call_user_func($callback, $i);
@@ -784,7 +781,7 @@ function iterator_map(callable $callback, \iterator $iter): \Generator
 /**
  * Perform callback on each item returned by an iterator and combine the result into an array.
  */
-function iterator_map_to_array(callable $callback, \iterator $iter): array
+function iterator_map_to_array(callable $callback, iterator $iter): array
 {
     return iterator_to_array(iterator_map($callback, $iter));
 }
@@ -793,7 +790,7 @@ function stringer($s): string
 {
     if (is_array($s)) {
         if (isset($s[0])) {
-            return "[" . implode(", ", array_map("Shimmie2\stringer", $s)) . "]";
+            return "[" . implode(", ", array_map("stringer", $s)) . "]";
         } else {
             $pairs = [];
             foreach ($s as $k=>$v) {

@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class PrivMsgTheme extends Themelet
 {
     public function display_pms(Page $page, $pms)

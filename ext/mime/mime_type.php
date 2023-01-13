@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 require_once "file_extension.php";
 
 class MimeType
@@ -154,17 +152,16 @@ class MimeType
     private static function compare_file_bytes(string $file_name, array $comparison): bool
     {
         $size = filesize($file_name);
-        $cc = count($comparison);
-        if ($size < $cc) {
+        if ($size < count($comparison)) {
             // Can't match because it's too small
             return false;
         }
 
         if (($fh = @fopen($file_name, 'rb'))) {
             try {
-                $chunk = unpack("C*", fread($fh, $cc));
+                $chunk = unpack("C*", fread($fh, count($comparison)));
 
-                for ($i = 0; $i < $cc; $i++) {
+                for ($i = 0; $i < count($comparison); $i++) {
                     $byte = $comparison[$i];
                     if ($byte == null) {
                         continue;

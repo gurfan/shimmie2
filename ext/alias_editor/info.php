@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class AliasEditorInfo extends ExtensionInfo
 {
     public const KEY = "alias_editor";

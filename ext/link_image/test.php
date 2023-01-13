@@ -1,9 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
-namespace Shimmie2;
-
 class LinkImageTest extends ShimmiePHPUnitTestCase
 {
     public function testLinkImage()
@@ -14,7 +11,7 @@ class LinkImageTest extends ShimmiePHPUnitTestCase
 
         $matches = [];
         preg_match("#value='https?://.*/(post/view/[0-9]+)'#", $this->page_to_text(), $matches);
-        $this->assertNotEmpty($matches);
+        $this->assertTrue(count($matches) > 0);
         $page = $this->get_page($matches[1]);
         $this->assertEquals("Post $image_id: pie", $page->title);
     }

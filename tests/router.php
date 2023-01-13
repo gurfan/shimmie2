@@ -1,9 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
-namespace Shimmie2;
-
 // custom routing for stand-alone mode, basically
 // .htaccess for the built-in php web server
 if (PHP_SAPI !== 'cli-server') {

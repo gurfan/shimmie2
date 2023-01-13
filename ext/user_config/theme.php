@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class UserConfigTheme extends Themelet
 {
     public function get_user_operations(string $key): string
@@ -41,7 +39,7 @@ class UserConfigTheme extends Themelet
      */
     public function display_user_config_page(Page $page, User $user, SetupPanel $panel)
     {
-        usort($panel->blocks, "Shimmie2\blockcmp");
+        usort($panel->blocks, "blockcmp");
 
         /*
          * Try and keep the two columns even; count the line breaks in

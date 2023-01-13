@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class VarnishPurgerInfo extends ExtensionInfo
 {
     public const KEY = "varnish";

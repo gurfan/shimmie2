@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class WikiTheme extends Themelet
 {
     /**
@@ -31,7 +29,7 @@ class WikiTheme extends Themelet
 
         // see if title is a category'd tag
         $title_html = html_escape($wiki_page->title);
-        if (class_exists('Shimmie2\TagCategories')) {
+        if (class_exists('TagCategories')) {
             $this->tagcategories = new TagCategories();
             $tag_category_dict = $this->tagcategories->getKeyedDict();
             $title_html = $this->tagcategories->getTagHtml($title_html, $tag_category_dict);

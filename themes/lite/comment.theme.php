@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class CustomCommentListTheme extends CommentListTheme
 {
     protected function comment_to_html(Comment $comment, bool $trim=false): string

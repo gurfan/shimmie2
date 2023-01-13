@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class CustomHtmlHeaders extends Extension
 {
     # Adds setup block for custom <head> content

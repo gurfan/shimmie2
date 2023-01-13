@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class ET extends Extension
 {
     /** @var ETTheme */
@@ -113,8 +111,7 @@ class ET extends Extension
                     'branch' => $commitBranch,
                     'origin' => $commitOrigin,
                 ];
-            } catch (\Exception $e) {
-                // If we can't get git data, just skip it
+            } catch (Exception $e) {
             }
         }
 

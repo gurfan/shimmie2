@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 /**
 * @global ImageRating[] $_shm_ratings
 */
@@ -28,14 +26,25 @@ class ImageRating
     }
 }
 
-function add_rating(ImageRating $rating): void
+function clear_ratings()
+{
+    global $_shm_ratings;
+    $keys = array_keys($_shm_ratings);
+    foreach ($keys as $key) {
+        if ($key != "?") {
+            unset($_shm_ratings[$key]);
+        }
+    }
+}
+
+function add_rating(ImageRating $rating)
 {
     global $_shm_ratings;
     if ($rating->code == "?" && array_key_exists("?", $_shm_ratings)) {
-        throw new \RuntimeException("? is a reserved rating code that cannot be overridden");
+        throw new RuntimeException("? is a reserved rating code that cannot be overridden");
     }
     if ($rating->code != "?" && in_array(strtolower($rating->search_term), Ratings::UNRATED_KEYWORDS)) {
-        throw new \RuntimeException("$rating->search_term is a reserved search term");
+        throw new RuntimeException("$rating->search_term is a reserved search term");
     }
     $_shm_ratings[$rating->code] = $rating;
 }
@@ -86,7 +95,7 @@ class Ratings extends Extension
         $codes = implode("", array_keys($_shm_ratings));
         $search_terms = [];
         foreach ($_shm_ratings as $key => $rating) {
-            $search_terms[] = $rating->search_term;
+            array_push($search_terms, $rating->search_term);
         }
         $this->search_regexp = "/^rating[=|:](?:(\*|[" . $codes . "]+)|(" .
             implode("|", $search_terms) . "|".implode("|", self::UNRATED_KEYWORDS)."))$/D";
@@ -182,7 +191,7 @@ class Ratings extends Extension
     }
     public function onBulkImport(BulkImportEvent $event)
     {
-        if (array_key_exists("rating", $event->fields)
+        if (property_exists($event->fields, "rating")
             && $event->fields->rating != null
             && Ratings::rating_is_valid($event->fields->rating)) {
             $this->set_rating($event->image->id, $event->fields->rating, "");

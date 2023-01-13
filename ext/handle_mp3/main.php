@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 // TODO: Add support for generating an icon from embedded cover art
 // TODO: MORE AUDIO FORMATS
 

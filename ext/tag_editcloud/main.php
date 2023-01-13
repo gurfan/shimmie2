@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 /* Todo:
  * 	usepref(todo2: port userpref)
  *	theme junk
@@ -106,7 +104,7 @@ class TagEditCloud extends Extension
                                         SELECT tag, FLOOR(LN(LN(count - :tag_min1 + 1)+1)*150)/200 AS scaled, count
                                         FROM tags
                                         WHERE count >= :tag_min2
-                                        ORDER BY SUM(count) OVER (PARTITION BY SUBSTRING_INDEX(tag, ':', 1)) DESC, CASE
+                                        ORDER BY SUM(count) OVER (PARTITION BY SUBSTRING_INDEX(tag, ':', 1)) DESC, CASE 
                                             WHEN tag LIKE '%:%' THEN 1
                                             ELSE 2
                                         END, tag
@@ -159,7 +157,7 @@ class TagEditCloud extends Extension
             $size = sprintf("%.2f", max($row['scaled'], 0.5));
             $js = html_escape('tageditcloud_toggle_tag(this,'.json_encode($full_tag).')'); //Ugly, but it works
 
-            if (in_array($row['tag'], $image->get_tag_array())) {
+            if (array_search($row['tag'], $image->get_tag_array()) !== false) {
                 if ($used_first) {
                     if ($last_used_cat !== $current_cat && $last_used_cat !== null) {
                         $precloud .= "</span><span class='tag-category'>\n";

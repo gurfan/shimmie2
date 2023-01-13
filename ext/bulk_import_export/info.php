@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 include_once "events.php";
 
 class BulkImportExportInfo extends ExtensionInfo

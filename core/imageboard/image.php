@@ -1,9 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
-namespace Shimmie2;
-
 /**
  * Class Image
  *
@@ -76,10 +73,6 @@ class Image
     public static function by_id(int $id): ?Image
     {
         global $database;
-        if ($id > 2**32) {
-            // for some reason bots query huge numbers and pollute the DB error logs...
-            return null;
-        }
         $row = $database->get_row("SELECT * FROM images WHERE images.id=:id", ["id"=>$id]);
         return ($row ? new Image($row) : null);
     }
@@ -156,7 +149,7 @@ class Image
     /**
      * Search for an array of images, returning a iterable object of Image
      */
-    public static function find_images_iterable(int $start = 0, ?int $limit = null, array $tags=[]): \Generator
+    public static function find_images_iterable(int $start = 0, ?int $limit = null, array $tags=[]): Generator
     {
         $result = self::find_images_internal($start, $limit, $tags);
         foreach ($result as $row) {
@@ -750,7 +743,7 @@ class Image
                         VALUES(:iid, :tid)
                     ", ["iid"=>$this->id, "tid"=>$id]);
 
-                    $written_tags[] = $id;
+                    array_push($written_tags, $id);
                 }
                 $database->execute(
                     "

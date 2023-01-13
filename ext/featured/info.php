@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class FeaturedInfo extends ExtensionInfo
 {
     public const KEY = "featured";

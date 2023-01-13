@@ -2,10 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
-use PhpParser\Node\Expr\Cast\Double;
-
 class Link
 {
     public ?string $page;

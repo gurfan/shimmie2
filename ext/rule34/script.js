@@ -1,12 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
-	if(Cookies.get("ui-tnc-agreed") !== "true" && window.location.href.indexOf("/wiki/") == -1) {
+	if(Cookies.get("ui-tnc-agreed") !== "true") {
 		$("BODY").addClass("censored");
 		$("BODY").append("<div class='tnc_bg'></div>");
 		$("BODY").append(""+
 			"<div class='tnc'>"+
-			"<p>Cookies may be used. Please read our <a href='https://rule34.paheal.net/wiki/Privacy%20policy'>privacy policy</a> for more information."+
-			"<p>By accepting to enter you agree to our <a href='https://rule34.paheal.net/wiki/rules'>rules</a> and <a href='https://rule34.paheal.net/wiki/Terms%20of%20use'>terms of service</a>."+
-			"<p><a onclick='tnc_agree();'>Agree</a> / <a href='https://google.com'>Disagree</a>"+
+			"<p>For legal reasons, we need to point out that:"+
+			"<p>A) this site contains material not suitable for minors"+
+			"<br>B) cookies may be used"+
+			"<p><a onclick='tnc_agree();'>Click here if you're an adult, and you're ok with that</a>"+
 			"</div>"+
 		"");
 	}

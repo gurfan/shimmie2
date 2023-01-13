@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 require_once "config.php";
 
 /**
@@ -149,7 +147,7 @@ class Upload extends Extension
     public function onPageSubNavBuilding(PageSubNavBuildingEvent $event)
     {
         if ($event->parent=="upload") {
-            if (class_exists("Shimmie2\Wiki")) {
+            if (class_exists("Wiki")) {
                 $event->add_nav_link("upload_guidelines", new Link('wiki/upload_guidelines'), "Guidelines");
             }
         }

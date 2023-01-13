@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 use function MicroHTML\LABEL;
 use function MicroHTML\A;
 use function MicroHTML\B;

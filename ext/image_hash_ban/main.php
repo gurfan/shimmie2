@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 use MicroCRUD\ActionColumn;
 use MicroCRUD\StringColumn;
 use MicroCRUD\DateColumn;

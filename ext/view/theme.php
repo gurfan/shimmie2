@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Shimmie2;
-
 class ViewImageTheme extends Themelet
 {
     public function display_meta_headers(Image $image)
