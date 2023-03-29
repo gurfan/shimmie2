@@ -248,7 +248,7 @@ TABLE.tag_list>TBODY>TR>TD:after {
 }
 
 .paginator {
-	clear: both;
+	clear: right;
 	padding: 4px;
 	border-right: 1px solid #C3D2E0;
 	border-left: 1px solid #C3D2E0;
