@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Shimmie2;
 
-class ScreenshotsListInfo extends ExtensionInfo
+class ScreenshotListInfo extends ExtensionInfo
 {
     public const KEY = "screenshots_list";
 
