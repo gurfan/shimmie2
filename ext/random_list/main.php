@@ -94,7 +94,7 @@ class RandomList extends Extension
                 send_event($plbe);
 
                 $this->theme->set_page_screenshots($page_number, $total_pages, $search_terms);
-                $this->theme->display_page($page, $images);
+                $this->theme->display_page_screenshots($page, $images);
                 if (count($plbe->parts) > 0) {
                     $this->theme->display_admin_block($plbe->parts);
                 }
