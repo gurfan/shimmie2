@@ -9,7 +9,7 @@ class ScreenshotsListInfo extends ExtensionInfo
     public const KEY = "screenshots_list";
 
     public string $key = self::KEY;
-    public string $name = "Screenshots Tab";
+    public string $name = "Screenshots List";
     public string $url = "";
     public array $authors = ["BooruAdmin"];
     public string $license = self::LICENSE_GPLV2;

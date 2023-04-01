@@ -67,7 +67,7 @@ class ScreenshotList extends Extension
     public function onPageSubNavBuilding(PageSubNavBuildingEvent $event)
     {
         if ($event->parent=="posts") {
-            $event->add_nav_link("sort_by_visits", new Link('popular_images'), "Popular Posts");
+            $event->add_nav_link("posts_screenshots", new Link('screenshots'), "Screenshots");
         }
     }
 }
