@@ -123,7 +123,6 @@ class RandomList extends Extension
     {
         if ($event->parent=="posts") {
             $event->add_nav_link("posts_random", new Link('random'), "Shuffle");
-            $event->add_nav_link("posts_screenshots", new Link('screenshots'), "Screenshots");
         }
     }
 }

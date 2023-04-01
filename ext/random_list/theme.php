@@ -50,6 +50,61 @@ class RandomListTheme extends Themelet
         $page->add_block(new Block("Navigation", $nav, "left", 0));
     }
 
+    public function display_page_screenshots(Page $page, array $images)
+    {
+        $page->title = "Screenshots";
+
+        if (count($images)) {
+            $html .= "<div class='shm-image-list'>";
+
+            foreach ($images as $image) {
+                $html .= $this->build_thumb_html($image);
+            }
+
+            $html .= "</div>";
+        } else {
+            $html .= "<br/><br/>No posts were found to match the search criteria";
+        }
+
+        $page->add_block(new Block("Screenshots", $html));
+
+        $nav = $this->build_navigation_screenshots($this->search_terms);
+        $page->add_block(new Block("Navigation", $nav, "left", 0));
+    }
+
+    /**
+     * #param string[] $search_terms
+     */
+    protected function build_navigation_screenshots(int $page_number, int $total_pages, array $search_terms): string
+    {
+        $prev = $page_number - 1;
+        $next = $page_number + 1;
+
+        $u_tags = url_escape(Tag::implode($search_terms));
+        $query = empty($u_tags) ? "" : '/'.$u_tags;
+
+
+        $h_prev = ($page_number <= 1) ? "Prev" : '<a href="'.make_link('post/list'.$query.'/'.$prev).'">Prev</a>';
+        $h_index = "<a href='".make_link()."'>Index</a>";
+        $h_next = ($page_number >= $total_pages) ? "Next" : '<a href="'.make_link('post/list'.$query.'/'.$next).'">Next</a>';
+
+        $h_search_string = html_escape(Tag::implode($search_terms));
+        $h_search_link = make_link();
+        $h_search = "
+			<p><form action='$h_search_link' method='GET'>
+				<input type='search' name='search' value='$h_search_string' placeholder='Search' class='autocomplete_tags' autocomplete='off' />
+				<input type='hidden' name='q' value='/post/list'>
+				<input type='submit' value='Find' style='display: none;' />
+			</form>
+		";
+
+        return $h_prev.' | '.$h_index.' | '.$h_next.'<br>'.$h_search;
+    }
+
+
+
+
+
     protected function build_navigation(array $search_terms): string
     {
         $h_search_string = html_escape(Tag::implode($search_terms));
