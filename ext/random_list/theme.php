@@ -68,7 +68,7 @@ class RandomListTheme extends Themelet
 
         $page->add_block(new Block("Screenshots", $html));
 
-        $nav = $this->build_navigation_screenshots($this->search_terms);
+        $nav = $this->build_navigation_screenshots($this->page_number, $this->total_pages, $this->search_terms);
         $page->add_block(new Block("Navigation", $nav, "left", 0));
     }
 
@@ -100,9 +100,6 @@ class RandomListTheme extends Themelet
 
         return $h_prev.' | '.$h_index.' | '.$h_next.'<br>'.$h_search;
     }
-
-
-
 
 
     protected function build_navigation(array $search_terms): string
