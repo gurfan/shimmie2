@@ -113,12 +113,12 @@ class Index extends Extension
 
             if ($count_search_terms === 0 && $count_images === 0 && $page_number === 1) {
                 $this->theme->display_intro($page);
-                send_event(new PostListBuildingEvent($search_terms));
+                send_event(new PostListBuildingEvent($search_terms_noscreenshot));
             } elseif ($count_search_terms > 0 && $count_images === 1 && $page_number === 1) {
                 $page->set_mode(PageMode::REDIRECT);
                 $page->set_redirect(make_link('post/view/'.$images[0]->id));
             } else {
-                $plbe = new PostListBuildingEvent($search_terms);
+                $plbe = new PostListBuildingEvent($search_terms_noscreenshot);
                 send_event($plbe);
 
                 $this->theme->set_page($page_number, $total_pages, $search_terms);
