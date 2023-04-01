@@ -38,7 +38,10 @@ class Index extends Extension
             }
 
             $search_terms = $event->get_search_terms();
-            array_push($search_terms, "-screenshot");
+
+            $search_terms_noscreenshot = $search_terms
+            array_push($search_terms_noscreenshot, "-screenshot");
+
             $page_number = $event->get_page_number();
             $page_size = $event->get_page_size();
 
@@ -75,7 +78,7 @@ class Index extends Extension
                     return;
                 }
 
-                $total_pages = Image::count_pages($search_terms);
+                $total_pages = Image::count_pages($search_terms_noscreenshot);
                 $images = [];
 
                 if (SPEED_HAX && $total_pages > $fast_page_limit && !$user->can("big_search")) {
@@ -87,14 +90,14 @@ class Index extends Extension
                         // extra caching for the first few post/list pages
                         $images = $cache->get("post-list:$page_number");
                         if (!$images) {
-                            $images = Image::find_images(($page_number-1)*$page_size, $page_size, $search_terms);
+                            $images = Image::find_images(($page_number-1)*$page_size, $page_size, $search_terms_noscreenshot);
                             $cache->set("post-list:$page_number", $images, 60);
                         }
                     }
                 }
 
                 if (!$images) {
-                    $images = Image::find_images(($page_number-1)*$page_size, $page_size, $search_terms);
+                    $images = Image::find_images(($page_number-1)*$page_size, $page_size, $search_terms_noscreenshot);
                 }
             } catch (PermissionDeniedException $pde) {
                 $this->theme->display_error(403, "Permission denied", $pde->error);
