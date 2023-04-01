@@ -38,7 +38,7 @@ class Index extends Extension
             }
 
             $search_terms = $event->get_search_terms();
-            $search_terms = array_push($search_terms, "-screenshot");
+            array_push($search_terms, "-screenshot");
             $page_number = $event->get_page_number();
             $page_size = $event->get_page_size();
 
