@@ -38,6 +38,7 @@ class Index extends Extension
             }
 
             $search_terms = $event->get_search_terms();
+            $search_terms = array_push($search_terms, "-screenshot")
             $page_number = $event->get_page_number();
             $page_size = $event->get_page_size();
 
@@ -144,7 +145,7 @@ class Index extends Extension
     public function onPageSubNavBuilding(PageSubNavBuildingEvent $event)
     {
         if ($event->parent=="posts") {
-            $event->add_nav_link("posts_all", new Link('post/list'), "All");
+            $event->add_nav_link("posts_all", new Link('post/list'), "Artwork");
             $event->add_nav_link("posts_screenshots", new Link('screenshots'), "Screenshots");
         }
     }
