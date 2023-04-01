@@ -6,7 +6,7 @@ namespace Shimmie2;
 
 class ScreenshotsListInfo extends ExtensionInfo
 {
-    public const KEY = "screenshots_tab";
+    public const KEY = "screenshots_list";
 
     public string $key = self::KEY;
     public string $name = "Screenshots Tab";
