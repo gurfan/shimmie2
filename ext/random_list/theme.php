@@ -11,12 +11,13 @@ class RandomListTheme extends Themelet
     /**
      * #param string[] $search_terms
      */
-    /*
+
     public function set_page(array $search_terms)
     {
         $this->search_terms = $search_terms;
-    }*/
-    public function set_page(int $page_number, int $total_pages, array $search_terms)
+    }
+
+    public function set_page_screenshots(int $page_number, int $total_pages, array $search_terms)
     {
         $this->page_number = $page_number;
         $this->total_pages = $total_pages;
