@@ -11,7 +11,7 @@ class ScreenshotsTabInfo extends ExtensionInfo
     public string $key = self::KEY;
     public string $name = "Screenshots Tab";
     public string $url = "";
-    public array $authors = "";
+    public array $authors = "BooruAdmin";
     public string $license = self::LICENSE_GPLV2;
     public string $description = "Isolates game screenshots to a seperate tab.";
     public ?string $documentation = "";
