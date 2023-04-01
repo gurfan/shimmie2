@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Shimmie2;
 
-class ScreenshotsTabInfo extends ExtensionInfo
+class ScreenshotsListInfo extends ExtensionInfo
 {
     public const KEY = "screenshots_tab";
 
