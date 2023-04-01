@@ -145,7 +145,7 @@ class Index extends Extension
     {
         if ($event->parent=="posts") {
             $event->add_nav_link("posts_all", new Link('post/list'), "All");
-            $event->add_nav_link("posts_all", new Link('post/list'), "Screenshots");
+            $event->add_nav_link("posts_screenshots", new Link('screenshots'), "Screenshots");
         }
     }
 
