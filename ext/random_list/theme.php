@@ -88,7 +88,7 @@ class RandomListTheme extends Themelet
         $h_index = "<a href='".make_link()."'>Index</a>";
         $h_next = ($page_number >= $total_pages) ? "Next" : '<a href="'.make_link('post/list'.$query.'/'.$next).'">Next</a>';
 
-        $search_terms_fixed = array_diff($search_terms, ["screenshot"])
+        $search_terms_fixed = array_diff($search_terms, ["screenshot"]);
         $h_search_string = html_escape(Tag::implode($search_terms_fixed));
         $h_search_link = make_link();
         $h_search = "
