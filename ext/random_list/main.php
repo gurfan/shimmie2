@@ -55,7 +55,7 @@ class RandomList extends Extension
         if ($event->page_matches("screenshots")) {
             if (isset($_GET['search'])) {
                 // implode(explode()) to resolve aliases and sanitise
-                $search = url_escape(Tag::implode(Tag::explode($_GET['search'], false)));
+                $search = url_escape(Tag::caret(Tag::implode(Tag::explode($_GET['search'], false))));
                 if (empty($search)) {
                     $page->set_mode(PageMode::REDIRECT);
                     $page->set_redirect(make_link("screenshots"));

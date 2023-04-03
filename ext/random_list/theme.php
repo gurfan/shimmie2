@@ -69,6 +69,7 @@ class RandomListTheme extends Themelet
         $page->add_block(new Block("Screenshots", $html));
 
         $nav = $this->build_navigation_screenshots($this->page_number, $this->total_pages, $this->search_terms);
+        $this->display_paginator($page, "screenshots/$query", null, $this->page_number, $this->total_pages, true);
         $page->add_block(new Block("Navigation", $nav, "left", 0));
     }
 
@@ -84,9 +85,9 @@ class RandomListTheme extends Themelet
         $query = empty($u_tags) ? "" : '/'.$u_tags;
 
 
-        $h_prev = ($page_number <= 1) ? "Prev" : '<a href="'.make_link('post/list'.$query.'/'.$prev).'">Prev</a>';
+        $h_prev = ($page_number <= 1) ? "Prev" : '<a href="'.make_link('screenshots'.$query.'/'.$prev).'">Prev</a>';
         $h_index = "<a href='".make_link()."'>Index</a>";
-        $h_next = ($page_number >= $total_pages) ? "Next" : '<a href="'.make_link('post/list'.$query.'/'.$next).'">Next</a>';
+        $h_next = ($page_number >= $total_pages) ? "Next" : '<a href="'.make_link('screenshots'.$query.'/'.$next).'">Next</a>';
 
         $search_terms_fixed = array_diff($search_terms, ["screenshot"]);
         $h_search_string = html_escape(Tag::implode($search_terms_fixed));
