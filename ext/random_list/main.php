@@ -70,8 +70,7 @@ class RandomList extends Extension
             $search_terms_screenshot = $search_terms;
             array_push($search_terms_screenshot, "screenshot");
 
-            print_r($search_terms);
-            print_r($search_terms_screenshot);
+            echo $this->count_args();
 
             $page_number = $event->get_page_number();
             $page_size = $event->get_page_size();
