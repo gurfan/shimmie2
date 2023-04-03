@@ -96,9 +96,9 @@ class RandomListTheme extends Themelet
         $query = empty($u_tags) ? "" : '/'.$u_tags;
 
 
-        $h_prev = ($page_number <= 1) ? "Prev" : '<a href="'.make_link('screenshots'.$query.'/'.$prev).'">Prev</a>';
+        $h_prev = ($page_number <= 1) ? "Prev" : '<a href="'.make_link(''.$query.'/'.$prev).'">Prev</a>';
         $h_index = "<a href='".make_link()."'>Index</a>";
-        $h_next = ($page_number >= $total_pages) ? "Next" : '<a href="'.make_link('screenshots'.$query.'/'.$next).'">Next</a>';
+        $h_next = ($page_number >= $total_pages) ? "Next" : '<a href="'.make_link(''.$query.'/'.$next).'">Next</a>';
 
         $search_terms_fixed = array_diff($search_terms, ["screenshot"]);
         $h_search_string = html_escape(Tag::implode($search_terms_fixed));
