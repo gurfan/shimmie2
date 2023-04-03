@@ -67,7 +67,7 @@ class RandomList extends Extension
             }
 
             $search_terms = $event->get_search_terms();
-            $search_terms_screenshot = $search_terms
+            $search_terms_screenshot = $search_terms;
             array_push($search_terms_screenshot, "screenshot");
 
             $page_number = $event->get_page_number();
