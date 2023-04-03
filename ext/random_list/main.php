@@ -67,14 +67,14 @@ class RandomList extends Extension
             }
 
             $search_terms = $event->get_search_terms();
-
-            array_push($search_terms, "screenshot");
+            $search_terms_screenshot = $search_terms
+            array_push($search_terms_screenshot, "screenshot");
 
             $page_number = $event->get_page_number();
             $page_size = $event->get_page_size();
 
-            $total_pages = Image::count_pages($search_terms);
-            $images = Image::find_images(($page_number-1)*$page_size, $page_size, $search_terms);
+            $total_pages = Image::count_pages( $search_terms_screenshot);
+            $images = Image::find_images(($page_number-1)*$page_size, $page_size,  $search_terms_screenshot);
 
             $count_images = count($images);
             $count_search_terms = count($search_terms);
