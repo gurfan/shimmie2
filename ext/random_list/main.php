@@ -66,13 +66,7 @@ class RandomList extends Extension
                 return;
             }
 
-            if ($event->count_args() == 0) {
-                $search_terms = [];
-            } elseif ($event->count_args() == 1) {
-                $search_terms = explode(' ', $event->get_arg(0));
-            } else {
-                throw new SCoreException("Error: too many arguments.");
-            }
+            $search_terms = $event->get_search_terms();
 
             array_push($search_terms, "screenshot");
 

@@ -69,9 +69,20 @@ class RandomListTheme extends Themelet
         $page->add_block(new Block("Screenshots", $html));
 
         $nav = $this->build_navigation_screenshots($this->page_number, $this->total_pages, $this->search_terms);
-        $this->display_paginator($page, "screenshots/$query", null, $this->page_number, $this->total_pages, true);
         $page->add_block(new Block("Navigation", $nav, "left", 0));
+
+        if (count($this->search_terms) > 0) {
+            if ($this->page_number > 3) {
+                // only index the first pages of each term
+                $page->add_html_header('<meta name="robots" content="noindex, nofollow">');
+            }
+            $query = url_escape(Tag::caret(Tag::implode($this->search_terms)));
+            $this->display_paginator($page, "screenshots/$query", null, $this->page_number, $this->total_pages, true);
+        } else {
+            $this->display_paginator($page, "screenshots", null, $this->page_number, $this->total_pages, true);
+        }
     }
+
 
     /**
      * #param string[] $search_terms
