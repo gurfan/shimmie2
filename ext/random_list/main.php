@@ -58,10 +58,10 @@ class RandomList extends Extension
                 $search = url_escape(Tag::implode(Tag::explode($_GET['search'], false)));
                 if (empty($search)) {
                     $page->set_mode(PageMode::REDIRECT);
-                    $page->set_redirect(make_link("screenshots"));
+                    $page->set_redirect(make_link("screenshots/1"));
                 } else {
                     $page->set_mode(PageMode::REDIRECT);
-                    $page->set_redirect(make_link('screenshots/'.$search));
+                    $page->set_redirect(make_link('screenshots/'.$search.'/1'));
                 }
                 return;
             }
