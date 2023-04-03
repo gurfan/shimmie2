@@ -89,8 +89,6 @@ class RandomListTheme extends Themelet
      */
     protected function build_navigation_screenshots(int $page_number, int $total_pages, array $search_terms): string
     {
-        echo "aaaaa";
-        echo $search_terms;
         $prev = $page_number - 1;
         $next = $page_number + 1;
 
