@@ -66,7 +66,7 @@ class RandomList extends Extension
                 return;
             }
 
-            $search_terms = $event->get_search_terms();
+            $search_terms = Tag::explode(Tag::decaret($this->get_arg(0)));
             $search_terms_screenshot = $search_terms;
             array_push($search_terms_screenshot, "screenshot");
 
