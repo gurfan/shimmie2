@@ -105,6 +105,82 @@ new UserClass("hellbanned", "user", [
     Permissions::HELLBANNED => true,
 ]);
 
+new UserClass("maintainer", "base", [
+    Permissions::CHANGE_USER_SETTING => true,
+    Permissions::BIG_SEARCH => true,
+
+    Permissions::MANAGE_EXTENSION_LIST => true,
+    Permissions::MANAGE_ALIAS_LIST => true,
+    Permissions::MANAGE_AUTO_TAG => true,
+    Permissions::MASS_TAG_EDIT => true,
+
+    Permissions::CREATE_COMMENT => true,
+    Permissions::DELETE_COMMENT => true,
+    Permissions::BYPASS_COMMENT_CHECKS => true,
+
+    Permissions::REPLACE_IMAGE => true,
+    Permissions::CREATE_IMAGE => true,
+    Permissions::EDIT_IMAGE_TAG => true,
+    Permissions::EDIT_IMAGE_SOURCE => true,
+    Permissions::EDIT_IMAGE_OWNER => true,
+    Permissions::EDIT_IMAGE_LOCK => true,
+    Permissions::EDIT_IMAGE_TITLE => true,
+    Permissions::EDIT_IMAGE_RELATIONSHIPS => true,
+    Permissions::EDIT_IMAGE_ARTIST => true,
+    Permissions::BULK_EDIT_IMAGE_TAG => true,
+    Permissions::BULK_EDIT_IMAGE_SOURCE => true,
+    Permissions::DELETE_IMAGE => true,
+
+    Permissions::VIEW_EVENTLOG => true,
+    Permissions::IGNORE_DOWNTIME => true,
+    Permissions::VIEW_REGISTRATIONS => true,
+
+    Permissions::CREATE_IMAGE_REPORT => true,
+    Permissions::VIEW_IMAGE_REPORT => true,
+
+    Permissions::WIKI_ADMIN => true,
+    Permissions::EDIT_WIKI_PAGE => true,
+    Permissions::DELETE_WIKI_PAGE => true,
+
+    Permissions::MANAGE_BLOCKS => true,
+
+    Permissions::MANAGE_ADMINTOOLS => true,
+
+    Permissions::SEND_PM => true,
+    Permissions::READ_PM => true,
+    Permissions::EDIT_FEATURE => true,
+
+    Permissions::PROTECTED => true,
+
+    Permissions::EDIT_IMAGE_RATING => true,
+    Permissions::BULK_EDIT_IMAGE_RATING => true,
+
+    Permissions::VIEW_TRASH => true,
+
+    Permissions::PERFORM_BULK_ACTIONS => true,
+
+    Permissions::EDIT_FILES => true,
+    Permissions::EDIT_TAG_CATEGORIES => true,
+    Permissions::RESCAN_MEDIA => true,
+    Permissions::SEE_IMAGE_VIEW_COUNTS => true,
+
+    Permissions::EDIT_FAVOURITES => true,
+
+    Permissions::ARTISTS_ADMIN => true,
+    Permissions::NOTES_ADMIN => true,
+    Permissions::POOLS_ADMIN => true,
+
+    Permissions::APPROVE_IMAGE => true,
+    Permissions::APPROVE_COMMENT => true,
+
+    Permissions::BULK_IMPORT =>true,
+    Permissions::BULK_EXPORT =>true,
+    Permissions::BULK_DOWNLOAD => true,
+
+    Permissions::SET_PRIVATE_IMAGE => true,
+    Permissions::SET_OTHERS_PRIVATE_IMAGES => true,
+]);
+
 new UserClass("admin", "base", [
     Permissions::CHANGE_SETTING => true,
     Permissions::CHANGE_USER_SETTING => true,
